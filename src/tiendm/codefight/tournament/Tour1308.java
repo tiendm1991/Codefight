@@ -63,10 +63,27 @@ public class Tour1308 {
 		return count;
 	}
 
+	int numberOfOperations(int a, int b) {
+	    int min = Math.min(a,b), max = Math.max(a,b);
+	    int count = 0;
+	    while(max % min == 0 && min > 1){
+	        count ++;
+	        int t = min;
+	        min = max /min;
+	        max = t;
+	        if(min > max){
+	            int tmp = max;
+	            max = min;
+	            min = tmp;
+	        }
+	    }
+	    return count;
+	}
+
 
 	public static void main(String[] args) {
 		Tour1308 t = new Tour1308();
 		int[] x = {4, 2, 3, 6, 2, 5, 4};
-		System.out.println(t.candles(5,2));
+		System.out.println(t.numberOfOperations(432,72));
 	}
 }
