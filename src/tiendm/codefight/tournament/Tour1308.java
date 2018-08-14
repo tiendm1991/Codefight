@@ -1,10 +1,10 @@
-package tiendm.codefight.challenge.august;
+package tiendm.codefight.tournament;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tour13 {
+public class Tour1308 {
 	int summaryProficiency(int[] a, int n, int m) {
 	    Arrays.sort(a);
 	    int sum = 0;
@@ -65,7 +65,7 @@ public class Tour13 {
 
 
 	public static void main(String[] args) {
-		Tour13 t = new Tour13();
+		Tour1308 t = new Tour1308();
 		int[] x = {4, 2, 3, 6, 2, 5, 4};
 		System.out.println(t.candles(5,2));
 	}
