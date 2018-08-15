@@ -43,5 +43,14 @@ public class Util {
 		}
 		return result;
 	}
+	
+	int countSumOfTwoRepresentations2(int n, int l, int r) {
+	    int c = 0;
+	    for(int i = l; i <= r; i++){
+	        if(i <= n-i && n-i <=r) c++;
+	    }
+	    return c;
+	}
+
 
 }
