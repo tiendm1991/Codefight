@@ -50,6 +50,20 @@ public class Tour1508 {
 		}
 		return true;
 	}
+	int firstMultiple(int[] divisors, int start) {
+	    int i = start;
+	    for(i = start; ; i++){
+	        int c = 0;
+	        for(int x : divisors){
+	            if(i % x == 0){
+	                c++;
+	            }else{
+	                break;
+	            }
+	        }
+	        if(c == divisors.length) return c;
+	    }  
+	}
 
 	public static void main(String[] args) {
 		Tour1508 t = new Tour1508();

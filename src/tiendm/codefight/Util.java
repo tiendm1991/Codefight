@@ -35,7 +35,7 @@ public class Util {
 	int countSumOfTwoRepresentations(int n, int l, int r) {
 		int result = 0;
 		for (int a = l; a <= r; a++) {
-			for (int b = a; b <= n; b++) {
+			for (int b = a; b <= r; b++) {
 				if (a + b == n) {
 					result++;
 					break;
@@ -53,5 +53,8 @@ public class Util {
 	    return c;
 	}
 
-
+	public static void main(String[] args) {
+		Util u = new Util();
+		System.out.println(u.countSumOfTwoRepresentations(93,24,58));
+	}
 }
