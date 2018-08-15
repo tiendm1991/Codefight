@@ -38,6 +38,7 @@ public class Util {
 			for (int b = a; b <= n; b++) {
 				if (a + b == n) {
 					result++;
+					break;
 				}
 			}
 		}
