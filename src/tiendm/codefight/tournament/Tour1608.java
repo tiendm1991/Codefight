@@ -16,6 +16,7 @@ public class Tour1608 {
 	    for(int x = i+1; x < a.length; x++){
 	        if(a[x] < a[x-1]) return false;
 	    }
+	    List<String> z = new ArrayList<>();
 	    return a[0] > a[a.length-1];
 	}
 
