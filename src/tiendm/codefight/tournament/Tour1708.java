@@ -78,11 +78,34 @@ public class Tour1708 {
 	    a[i] = a[j];
 	    a[j] = tmp;
 	}
+	
+	String[] sortByLength2(String[] inputArray) {
+	    for(int i = 1; i < inputArray.length; i++){
+	        int l = inputArray[i].length();
+	        String cur = inputArray[i];
+	        int j = i-1;
+	        while(j >= 0 && inputArray[j].length() > l){
+	            inputArray[j+1] = inputArray[j];
+	            j--;
+	        }
+	        inputArray[j+1] = cur;
+	    }	
+	    return inputArray;
+	}
 
 
 	public static void main(String[] args) {
 		Tour1708 t = new Tour1708();
-		int[] x = { 5, 9, 1, 2, 4 };
-		System.out.println(t.bishopAndPawn("a1", "c3"));
+		String[] x = {"thitl", 
+				 "", 
+				 "sadhxirg", 
+				 "hx", 
+				 "ondyxds", 
+				 "kncor", 
+				 "sqrg", 
+				 "hqtchyxku", 
+				 "rl", 
+				 "wd"};
+		System.out.println(t.sortByLength2(x));
 	}
 }
