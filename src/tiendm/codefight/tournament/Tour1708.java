@@ -1,7 +1,8 @@
 package tiendm.codefight.tournament;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 
 public class Tour1708 {
 
@@ -22,26 +23,62 @@ public class Tour1708 {
 		note.toCharArray();
 		return s;
 	}
-	
+
 	String stolenLunch(String note) {
-	    char[] c = note.toCharArray();
-	    for(int i = 0; i < c.length; i++){
-	        if(c[i] >= '0' && c[i] <= '9'){
-	            c[i] = (char) ((int)'a' + c[i] - '0');
-	        }else if(c[i] >= 'a' && c[i] <= 'j'){
-	            c[i] = (char) ((int)'0' + c[i] - 'a');
-	        }
-	    }
-	    return new String(c);
+		char[] c = note.toCharArray();
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] >= '0' && c[i] <= '9') {
+				c[i] = (char) ((int) 'a' + c[i] - '0');
+			} else if (c[i] >= 'a' && c[i] <= 'j') {
+				c[i] = (char) ((int) '0' + c[i] - 'a');
+			}
+		}
+		return new String(c);
+	}
+
+	boolean bishopAndPawn(String bishop, String pawn) {
+		int x1 = bishop.charAt(0) - 'a' + 1;
+		int y1 = bishop.charAt(1) - '0';
+		int x2 = pawn.charAt(0) - 'a' + 1;
+		int y2 = pawn.charAt(1) - '0';
+		return (x1 + y1) == (x2 + y2) || Math.abs(y1 - x1) == Math.abs(y2 - x2);
+	}
+
+	int commonCharacterCount(String s1, String s2) {
+		HashMap<Character, Integer> map1 = new HashMap<>();
+		HashMap<Character, Integer> map2 = new HashMap<>();
+		int answer = 0;
+		for (int i = 0; i < s1.length(); i++) {
+			char ch = s1.charAt(i);
+			map1.put(ch, map1.containsKey(ch) ? (map1.get(ch) + 1) : 1);
+		}
+		for (int i = 0; i < s2.length(); i++) {
+			char ch = s2.charAt(i);
+			map2.put(ch, map2.containsKey(ch) ? (map2.get(ch) + 1) : 1);
+		}
+		for (char ch = 'a'; ch <= 'z'; ch++) {
+			answer += Math.min(map1.get(ch), map2.get(ch));
+		}
+		return answer;
 	}
 	
-	boolean bishopAndPawn(String bishop, String pawn) {
-	    int x1 = bishop.charAt(0) - 'a' + 1;
-	    int y1 = bishop.charAt(1) - '0';
-	    int x2 = pawn.charAt(0) - 'a' + 1;
-	    int y2 = pawn.charAt(1) - '0';
-	    return (x1 + y1) == (x2 + y2) || Math.abs(y1-x1) == Math.abs(y2-x2);
+	String[] sortByLength(String[] inputArray) {
+	    for(int i = 0; i < inputArray.length-1; i++){
+	        for(int j = i+1; j < inputArray.length; j++){
+	            if(inputArray[i] .length() > inputArray[j].length()){
+	                swap(inputArray,i,j);
+	            }
+	        }
+	    }	
+	    return inputArray;
 	}
+
+	void swap(String[] a, int i, int j){
+	    String tmp = a[i];
+	    a[i] = a[j];
+	    a[j] = tmp;
+	}
+
 
 	public static void main(String[] args) {
 		Tour1708 t = new Tour1708();
