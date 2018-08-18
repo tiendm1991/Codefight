@@ -1,5 +1,8 @@
 package tiendm.codefight.tournament;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Tour1808 {
 
 	int[][] create2DArray(int[] lengths) {
@@ -30,9 +33,19 @@ public class Tour1808 {
 		return s;
 	}
 
+	int differentSubstrings(String inputString) {
+		Set<String> l = new HashSet<>();
+		for (int i = 1; i <= inputString.length(); i++) {
+			for (int j = 0; j < inputString.length() - i + 1; j++) {
+				l.add(inputString.substring(j, j + i));
+			}
+		}
+		return l.size();
+	}
+
 	public static void main(String[] args) {
 		Tour1808 t = new Tour1808();
 		int[] x = { 3, 5, 7, 9 };
-		System.out.println(t.numberOfTriangles2(x));
+		System.out.println(t.differentSubstrings("abac"));
 	}
 }
