@@ -1,8 +1,10 @@
 package tiendm.codefight.tournament;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class Tour1708 {
 
@@ -93,19 +95,63 @@ public class Tour1708 {
 	    return inputArray;
 	}
 
+	Integer[] digitDifferenceSort(Integer[] a) {
+		Arrays.sort(a, new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				int diff1 = diff(o1);
+				int diff2 = diff(o2);
+				if(diff1 == diff2){
+					for(int i = 0; i < a.length; i++){
+						if(a[i].intValue() == o1.intValue()) return 1;
+						if(a[i].intValue() == o2.intValue()) return -1;
+					}
+				}
+				return diff1 - diff2;
+			}
+		});
+		return a;
+	}
+	
+	int diff(int x){
+		int max = 0, min = x;
+		String s = x+"";
+		if(s.length() == 1) return 0;
+		for(int i = 0; i < s.length(); i++){
+			int c = s.charAt(i) - '0';
+			if(c > max) max = c;
+			if(c < min) min = c;
+		}
+		return max - min;
+	}
+	
+	int arrayConversion(Integer[] inputArray) {
+	    List<Integer> x = Arrays.asList(inputArray);
+	    List<Integer> y = new ArrayList<>();
+	    int step = 0;
+	    while (x.size() > 1) {
+	    	y = new ArrayList<>();
+			if(step % 2 == 0){
+				for(int i = 0; i < x.size()-1; i+=2){
+					y.add(x.get(i) + x.get(i+1));
+				}
+			}else{
+				for(int i = 0; i < x.size()-1; i+=2){
+					y.add(x.get(i) * x.get(i+1));
+				}
+			}
+			step++;
+			x = y;
+		}
+	    return x.get(0);
+	}
+
 
 	public static void main(String[] args) {
 		Tour1708 t = new Tour1708();
-		String[] x = {"thitl", 
-				 "", 
-				 "sadhxirg", 
-				 "hx", 
-				 "ondyxds", 
-				 "kncor", 
-				 "sqrg", 
-				 "hqtchyxku", 
-				 "rl", 
-				 "wd"};
-		System.out.println(t.sortByLength2(x));
+		String[] x = { "thitl", "", "sadhxirg", "hx", "ondyxds", "kncor", "sqrg", "hqtchyxku", "rl", "wd" };
+		Integer[] y = {152, 23, 7, 887, 243};
+		System.out.println(t.digitDifferenceSort(y));
 	}
 }
