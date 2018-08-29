@@ -1,5 +1,8 @@
 package tiendm.codefight.tournament;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tour2608 {
 
 	int comfortableNumbers(int l, int r) {
@@ -47,10 +50,24 @@ public class Tour2608 {
 		return s;
 	}
 
+	List<String> isDivisibleBy6(String inputString) {
+	    List<String> ls = new ArrayList<>();
+	    
+	    for(int i = 0; i < 10; i++){
+	        String s = inputString.replace('*', (char)('0' + i));
+	        int a = Integer.parseInt(s);
+	        if(a % 6 == 0) ls.add(s);
+	    }
+	    return ls;
+	}
+	int countLineColorings(int points, int colors) {
+	    return colors * (int)Math.pow(colors-1, points-1);
+	}
+
 	public static void main(String[] args) {
 		Tour2608 t = new Tour2608();
 		int[][] x = { { 0, 1, 2, 3 }, { 1, 2, 3, 0 }, { 1, 1, 1 } };
 		int[] p = { 0, 0, 0, 1 };
-		System.out.println(t.comfortableNumbers(10, 12));
+		System.out.println(t.isDivisibleBy6("1*0"));
 	}
 }
