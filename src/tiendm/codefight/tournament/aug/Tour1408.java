@@ -1,4 +1,4 @@
-package tiendm.codefight.tournament;
+package tiendm.codefight.tournament.aug;
 
 import java.util.Arrays;
 

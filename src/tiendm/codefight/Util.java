@@ -69,9 +69,18 @@ public class Util {
 		}
 		return s;
 	}
+	
+	int gcd(int a, int b){
+		while(a % b != 0){
+			int tmp = b;
+			b = a % b;
+			a = tmp;
+		}
+		return b;
+	}
 
 	public static void main(String[] args) {
 		Util u = new Util();
-		System.out.println(u.countSumOfTwoRepresentations(93, 24, 58));
+		System.out.println(u.gcd(15, 9));
 	}
 }

@@ -1,4 +1,4 @@
-package tiendm.codefight.tournament;
+package tiendm.codefight.tournament.aug;
 
 public class Tour2308 {
 	int equalPairOfBits(int n, int m) {
