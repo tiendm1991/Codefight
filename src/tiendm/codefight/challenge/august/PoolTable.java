@@ -1,26 +1,23 @@
 package tiendm.codefight.challenge.august;
 
-import javax.crypto.spec.GCMParameterSpec;
-
 public class PoolTable {
 	int poolTableBounce(int width, int height) {
-		int gcd = gcd(width, height);
-		int scm = (width * height) / gcd;
-		int mid = scm / 2;
-		if (mid % height == 0) {
-			if ((mid / height) % 2 == 1) {
+		int gcd = gcd(width / 2, height);
+		if (height % (2 * gcd) != 0) {
+			if ((width / (2 * gcd)) % 2 == 0) {
+				return 5;
+			} else {
 				return 2;
 			}
-			return 5;
 		}
-		if (scm / width % 2 == 0) {
-			if (scm / height % 2 == 0) {
-				return 1;
+		if (height / (2 * gcd) % 2 == 0) {
+			if (width / (2 * gcd) % 2 == 0) {
+				return 0;
 			} else {
 				return 1;
 			}
 		} else {
-			if (scm / height % 2 == 0) {
+			if (width / (2 * gcd) % 2 == 0) {
 				return 4;
 			} else {
 				return 3;
