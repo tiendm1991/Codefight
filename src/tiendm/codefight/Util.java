@@ -1,6 +1,19 @@
 package tiendm.codefight;
 
 public class Util {
+	boolean binarySearch(int[] arr, int i, int begin, int end) {
+		if(begin == end) {
+			return arr[begin] == i;
+		}
+		int mid = (begin+end) /2;
+		if(arr[mid] == i) return true;
+		else if (arr[mid] < i) {
+			return binarySearch(arr, i, mid+1, end);
+		}else{
+			return binarySearch(arr, i, begin, mid);
+		}
+	}
+	
 	boolean isPrime(int x) {
 		if (x == 2 || x == 3)
 			return true;
@@ -61,7 +74,7 @@ public class Util {
 		return result;
 	}
 	
-	int count(int x) {
+	int countDigit(int x) {
 		int s = 0;
 		while (x > 0) {
 			s += x % 10;
