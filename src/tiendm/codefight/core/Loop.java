@@ -129,9 +129,9 @@ public class Loop {
 			leftOver = candlesNew % makeNew;
 			candlesNew = candlesNew / makeNew;
 			int candlesFromLeftOver = (leftOver + preLeftOver) / makeNew;
+			preLeftOver = (leftOver + preLeftOver) % makeNew;
 			candlesNew += candlesFromLeftOver;
 			sum += candlesNew ;
-			preLeftOver = (leftOver + preLeftOver) % makeNew;
 		}
 		return sum;
 	}
@@ -212,5 +212,6 @@ public class Loop {
 	
 	public static void main(String[] args) {
 		Loop test = new Loop();
+		System.out.println(test.candles2(5, 2));
 	}
 }
