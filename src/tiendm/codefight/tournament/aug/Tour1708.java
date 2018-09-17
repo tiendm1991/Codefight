@@ -152,6 +152,6 @@ public class Tour1708 {
 		Tour1708 t = new Tour1708();
 		String[] x = { "thitl", "", "sadhxirg", "hx", "ondyxds", "kncor", "sqrg", "hqtchyxku", "rl", "wd" };
 		Integer[] y = {152, 23, 7, 887, 243};
-		System.out.println(t.digitDifferenceSort(y));
+		System.out.println(t.sortByLength2(x));
 	}
 }
