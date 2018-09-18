@@ -34,12 +34,24 @@ public class Tour1709 {
 
 			@Override
 			public int compare(Integer o1, Integer o2) {
-				return 0;
+				int x1 = countDigit(o1);
+				int x2 = countDigit(o2);
+				if(x1 == x2){
+					return o1 - o2;
+				}
+				return x1-x2;
 			}
 		});
 		return a;
 	}
-
+	int countDigit(int x) {
+		int s = 0;
+		while (x > 0) {
+			s += x % 10;
+			x /= 10;
+		}
+		return s;
+	}
 
 	public static void main(String[] args) {
 		Tour1709 t = new Tour1709();
