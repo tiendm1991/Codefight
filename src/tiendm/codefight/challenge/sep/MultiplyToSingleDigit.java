@@ -29,8 +29,8 @@ public class MultiplyToSingleDigit {
 			for(int i = 0; i < s.length(); i++){
 				product *= ((s.charAt(i) - '0') + added);
 			}
-			if(product == number || product > limit || lsResult.contains(product)) return true;
 			if(product < 10 || lsFalse.contains(product)) return false;
+			if(product == number || product > limit || lsResult.contains(product)) return true;
 			number = product;
 		}
 	}

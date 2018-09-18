@@ -1,5 +1,7 @@
 package tiendm.codefight.tournament.sep;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -26,6 +28,18 @@ public class Tour1709 {
 	int getInt(String s, int idx){
 		return s.charAt(idx) - '0';
 	}
+	
+	Integer[] digitalSumSort(Integer[] a) {
+		Arrays.sort(a, new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return 0;
+			}
+		});
+		return a;
+	}
+
 
 	public static void main(String[] args) {
 		Tour1709 t = new Tour1709();
