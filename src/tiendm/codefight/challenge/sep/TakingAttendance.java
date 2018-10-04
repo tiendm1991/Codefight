@@ -1,7 +1,5 @@
 package tiendm.codefight.challenge.sep;
 
-package search.bus.validator;
-
 /**
  * @author tien.dinhmanh
  *
