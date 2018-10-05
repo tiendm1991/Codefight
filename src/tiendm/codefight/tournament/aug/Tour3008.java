@@ -29,17 +29,17 @@ public class Tour3008 {
 	}
 	
 	int rounders(int n) {
-	    String s = n + "";
-	    for(int i = s.length() - 1; i > 0; i--){
-	        int x = s.charAt(i) - '0';
-	        int y = s.charAt(i-1) - '0';
-	        if(x >= 5){
-	            y++;
-	        }
-	        x = 0;
-	        s = s.substring(0,i-1) + y + x + s.substring(i+1);
-	    }
-	    return Integer.parseInt(s);
+		    String s = n + "";
+		    for(int i = s.length() - 1; i > 0; i--){
+		        int x = s.charAt(i) - '0';
+		        int y = s.charAt(i-1) - '0';
+		        if(x >= 5){
+		            y++;
+		        }
+		        x = 0;
+		        s = s.substring(0,i-1) + y + x + s.substring(i+1);
+		    }
+		    return Integer.parseInt(s);
 	}
 	
 	int sequenceElement(int[] a, int n) {
