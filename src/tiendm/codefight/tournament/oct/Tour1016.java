@@ -1,5 +1,7 @@
 package tiendm.codefight.tournament.oct;
 
+import java.util.stream.IntStream;
+
 public class Tour1016 {
 	
 	int visitsOnCircularRoad(int n, int[] visitsOrder) {
@@ -14,7 +16,8 @@ public class Tour1016 {
 
 	public static void main(String[] args) {
 		Tour1016 t = new Tour1016();
-		int[] toV = { 3, 2, 1, 3, 2, 1, 4 };
-		System.out.println(t);
+		int[] values = { 3, 2, 1 };
+		int k = IntStream.of(values).reduce(1, (a, b) -> a * b);
+		System.out.println(k);
 	}
 }
