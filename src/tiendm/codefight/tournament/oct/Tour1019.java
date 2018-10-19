@@ -68,8 +68,8 @@ public class Tour1019 {
 		for (int i = 0; i < L; i++) {
 			int x = numbers[i];
 			String s = x + "";
-			int idx = L-1;
-			for (int j = s.length()-1; j >= 0; j--) {
+			int idx = L - 1;
+			for (int j = s.length() - 1; j >= 0; j--) {
 				arr[i][idx--] = s.charAt(j) - '0';
 			}
 		}
@@ -84,9 +84,74 @@ public class Tour1019 {
 		return result;
 	}
 
+	String addDigits(int a, int b, int n) {
+		String s = a + "";
+		int max = (int) Math.pow(10, n);
+		String format = "%0" + n + "d";
+		for (int i = 1; i < max; i++) {
+			String newStr = s + String.format(format, i);
+			if (Integer.parseInt(newStr) % b == 0)
+				return newStr;
+		}
+		return "";
+	}
+
+	String insertDashes(String inputString) {
+		String s = "";
+		boolean add = true;
+		for (int i = 0; i < inputString.length(); i++) {
+			if (inputString.charAt(i) != ' ') {
+				if (add) {
+					s += "-";
+				}
+				s += inputString.charAt(i);
+				add = true;
+			} else {
+				s += " ";
+				add = false;
+			}
+		}
+		return s.substring(1);
+	}
+
+	int rangeBitCount(int a, int b) {
+
+		int ans = 0;
+		for (int i = a; i <= b; i++) {
+			int t = i;
+			while (t != 0) {
+				ans += t % 2;
+				t /= 2;
+			}
+		}
+
+		return ans;
+	}
+
+	boolean isIncreasingDigitsSequence(int n) {
+		int x = n % 10;
+		n /= 10;
+		while (n > 0) {
+			int y = n % 10;
+			if (y >= x)
+				return false;
+			x = y;
+			n /= 10;
+		}
+		return true;
+	}
+
+	int[] inversePermutation(int[] permutation) {
+		int[] arr = new int[permutation.length];
+		for (int i = 0; i < permutation.length; i++) {
+			arr[permutation[i]-1] = i+1;
+		}
+		return arr;
+	}
+
 	public static void main(String[] args) {
 		Tour1019 t = new Tour1019();
-		int[] values = { 12, 345, 67, 5};
-		System.out.println(t.directionOfReading(values));
+		int[] values = { 1,3,4,2};
+		System.out.println(t.inversePermutation(values));
 	}
 }
