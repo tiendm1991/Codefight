@@ -1,23 +1,26 @@
 package tiendm.codefight;
 
+import java.util.Arrays;
+
 public class Util {
 	boolean binarySearch(int[] arr, int i, int begin, int end) {
-		if(begin == end) {
+		if (begin == end) {
 			return arr[begin] == i;
 		}
-		int mid = (begin+end) /2;
-		if(arr[mid] == i) return true;
+		int mid = (begin + end) / 2;
+		if (arr[mid] == i)
+			return true;
 		else if (arr[mid] < i) {
-			return binarySearch(arr, i, mid+1, end);
-		}else{
+			return binarySearch(arr, i, mid + 1, end);
+		} else {
 			return binarySearch(arr, i, begin, mid);
 		}
 	}
-	
+
 	boolean isPrime(int x) {
 		if (x == 2 || x == 3)
 			return true;
-		for (int i = 2; i <= x / 2 ; i++) {
+		for (int i = 2; i <= x / 2; i++) {
 			if (x % i == 0)
 				return false;
 		}
@@ -73,7 +76,7 @@ public class Util {
 
 		return result;
 	}
-	
+
 	int countDigit(int x) {
 		int s = 0;
 		while (x > 0) {
@@ -82,14 +85,45 @@ public class Util {
 		}
 		return s;
 	}
-	
-	int gcd(int a, int b){
-		while(a % b != 0){
+
+	int gcd(int a, int b) {
+		while (a % b != 0) {
 			int tmp = b;
 			b = a % b;
 			a = tmp;
 		}
 		return b;
+	}
+
+	String htmlEndTagByStartTag(String startTag) {
+		String result = "</";
+		int position = 1;
+		while (startTag.charAt(position) != ' ') {
+			result += startTag.charAt(position++);
+		}
+		result += '>';
+		return result;
+	}
+
+	int swapNeighbouringDigits(int n) {
+		String s = n + "";
+		char[] c = s.toCharArray();
+		for (int i = 0; i < c.length - 1; i += 2) {
+			char tmp = c[i];
+			c[i] = c[i + 1];
+			c[i + 1] = tmp;
+		}
+		String newStr = new String(c);
+		return Integer.parseInt(newStr);
+	}
+
+	int arrayMinimumAboveBound(int[] inputArray, int bound) {
+		Arrays.sort(inputArray);
+		for (int x : inputArray) {
+			if (x > bound)
+				return x;
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) {

@@ -94,6 +94,18 @@ public class Tour1708 {
 	    }	
 	    return inputArray;
 	}
+	
+	List<String> sortByLength3(String[] inputArray) {
+		List<String> ls = new ArrayList<>();
+	    for(int i = 0; i < 100; i++){
+	        for(String s : inputArray){
+	        	if(s.length() == i){
+	        		ls.add(s);
+	        	}
+	        }
+	    }	
+	    return ls;
+	}
 
 	Integer[] digitDifferenceSort(Integer[] a) {
 		Arrays.sort(a, new Comparator<Integer>() {
