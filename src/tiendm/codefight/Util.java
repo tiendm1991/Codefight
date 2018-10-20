@@ -77,7 +77,7 @@ public class Util {
 		return result;
 	}
 
-	int countDigit(int x) {
+	int digitSum(int x) {
 		int s = 0;
 		while (x > 0) {
 			s += x % 10;
