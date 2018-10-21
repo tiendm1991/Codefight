@@ -58,6 +58,28 @@ public class Tour1021 {
 	double distance(int x1, int x2, int y1, int y2) {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
+	
+	String htmlEndTagByStartTag(String startTag) {
+		String result = "</";
+		int position = 1;
+		while (startTag.charAt(position) != ' ') {
+			result += startTag.charAt(position++);
+		}
+		result += '>';
+		return result;
+	}
+
+	int swapNeighbouringDigits(int n) {
+		String s = n + "";
+		char[] c = s.toCharArray();
+		for (int i = 0; i < c.length - 1; i += 2) {
+			char tmp = c[i];
+			c[i] = c[i + 1];
+			c[i + 1] = tmp;
+		}
+		String newStr = new String(c);
+		return Integer.parseInt(newStr);
+	}
 
 	public static void main(String[] args) {
 		Tour1021 t = new Tour1021();

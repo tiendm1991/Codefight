@@ -101,28 +101,6 @@ public class Util {
         return fact(n - 1) * n;
     }
 
-	String htmlEndTagByStartTag(String startTag) {
-		String result = "</";
-		int position = 1;
-		while (startTag.charAt(position) != ' ') {
-			result += startTag.charAt(position++);
-		}
-		result += '>';
-		return result;
-	}
-
-	int swapNeighbouringDigits(int n) {
-		String s = n + "";
-		char[] c = s.toCharArray();
-		for (int i = 0; i < c.length - 1; i += 2) {
-			char tmp = c[i];
-			c[i] = c[i + 1];
-			c[i + 1] = tmp;
-		}
-		String newStr = new String(c);
-		return Integer.parseInt(newStr);
-	}
-
 	int arrayMinimumAboveBound(int[] inputArray, int bound) {
 		Arrays.sort(inputArray);
 		for (int x : inputArray) {
