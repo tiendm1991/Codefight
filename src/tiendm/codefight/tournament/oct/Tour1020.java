@@ -8,11 +8,6 @@ public class Tour1020 {
 		return Arrays.asList(strings).stream().map(x -> x).collect(Collectors.joining(separator)) + separator;
 	}
 
-	int findSquareSide(int[] x, int[] y) {
-		int n = Math.min(y[2] - y[0], y[1] - y[0]);
-		return n * n;
-	}
-
 	int[] easyAssignmentProblem(int[][] skills) {
 		int a1 = skills[0][0] + skills[1][1];
 		int a2 = skills[0][1] + skills[1][0];
