@@ -113,6 +113,15 @@ public class Util {
 	double distance(int x1, int x2, int y1, int y2) {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
+	
+	int indexOf(int[] values, int check){
+		for(int i = 0; i < values.length; i++){
+			if(values[i] == check){
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	public static void main(String[] args) {
 		Util u = new Util();
