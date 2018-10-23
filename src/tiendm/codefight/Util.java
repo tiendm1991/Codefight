@@ -1,6 +1,8 @@
 package tiendm.codefight;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Util {
 	boolean binarySearch(int[] arr, int i, int begin, int end) {
@@ -94,12 +96,12 @@ public class Util {
 		}
 		return b;
 	}
-	
+
 	int fact(int n) {
-        if (n == 0)
-            return 1;
-        return fact(n - 1) * n;
-    }
+		if (n == 0)
+			return 1;
+		return fact(n - 1) * n;
+	}
 
 	int arrayMinimumAboveBound(int[] inputArray, int bound) {
 		Arrays.sort(inputArray);
@@ -109,18 +111,46 @@ public class Util {
 		}
 		return -1;
 	}
-	
+
 	double distance(int x1, int x2, int y1, int y2) {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
-	
-	int indexOf(int[] values, int check){
-		for(int i = 0; i < values.length; i++){
-			if(values[i] == check){
+
+	int indexOf(int[] values, int check) {
+		for (int i = 0; i < values.length; i++) {
+			if (values[i] == check) {
 				return i;
 			}
 		}
 		return -1;
+	}
+
+	int bfsComponentSize(boolean[][] matrix) {
+
+		ArrayList<Boolean> visited = new ArrayList<>();
+		LinkedList<Integer> queue = new LinkedList<>();
+		int componentSize = 0;
+
+		for (int i = 0; i < matrix.length; i++) {
+			visited.add(false);
+		}
+
+		visited.set(1, true);
+		queue.add(1);
+
+		while (queue.size() > 0) {
+			int currentVertex = queue.pop();
+			visited.set(currentVertex, true);
+			componentSize++;
+			for (int nextVertex = 0; nextVertex < matrix.length; nextVertex++) {
+				if (matrix[currentVertex][nextVertex] && !visited.get(nextVertex)) {
+					visited.set(nextVertex, true);
+					queue.add(nextVertex);
+				}
+			}
+		}
+
+		return componentSize;
 	}
 
 	public static void main(String[] args) {
