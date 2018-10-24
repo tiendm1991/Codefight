@@ -26,7 +26,6 @@ public class Tour2308 {
 	String cipher26(String message) {
 		String str = "";
 		for (int i = 0; i < message.length(); i++) {
-			int s = 0;
 			int c = message.charAt(i) - 'a';
 			int cur = caculate(str);
 			for (int j = 0; j < 26; j++) {
