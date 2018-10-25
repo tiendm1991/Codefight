@@ -77,6 +77,21 @@ public class Tour1025 {
     return h.result;
   }
 
+  int mirrorBits(int a) {
+
+    int b = 0;
+    while (a > 0) {
+      b <<= 1;
+      b |= a & 1;
+      a >>= 1;
+    }
+
+    return b;
+  }
+
+  int centuryFromYear(int year) {
+    return (year - 1) / 100 + 1;
+  }
 
   public static void main(String[] args) {
     Tour1025 t = new Tour1025();
