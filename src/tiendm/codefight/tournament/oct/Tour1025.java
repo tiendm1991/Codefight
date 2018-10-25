@@ -1,6 +1,7 @@
 package tiendm.codefight.tournament.oct;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Tour1025 {
   int howManySundays(int n, String startDay) {
@@ -163,6 +164,55 @@ public class Tour1025 {
     return sequence;
   }
 
+  double arrayMedian(int[] sequence) {
+    int len = sequence.length;
+    Arrays.sort(sequence);
+
+    if (len % 2 == 0) {
+      return (sequence[len / 2] + sequence[len / 2 - 1]) / 2.0;
+    } else {
+      return sequence[(len - 1) / 2];
+    }
+  }
+
+  int[][] constructSubmatrix(int[][] matrix, int[] rowsToDelete, int[] columnsToDelete) {
+    int newRowsLength = matrix.length - rowsToDelete.length;
+    int newColumnsLength = matrix[0].length - columnsToDelete.length;
+    int[][] res = new int[newRowsLength][newColumnsLength];
+    boolean[] useRow = new boolean[matrix.length];
+    boolean[] useColumn = new boolean[matrix[0].length];
+    Arrays.fill(useRow, true);
+    Arrays.fill(useColumn, true);
+
+    for (int i = 0; i < rowsToDelete.length; i++) {
+      useRow[rowsToDelete[i]] = false;
+    }
+    for (int i = 0; i < columnsToDelete.length; i++) {
+      useColumn[columnsToDelete[i]] = false;
+    }
+
+    for (int i = 0, i2 = 0; i < matrix.length; i++) {
+      if (useRow[i]) {
+        for (int j = 0, j2 = 0; j < matrix[0].length; j++) {
+          if (useColumn[j]) {
+            res[i2][j2++] = matrix[i][j];
+          }
+        }
+        i2++;
+      }
+    }
+
+    return res;
+  }
+
+  int[] firstReverseTry(int[] arr) {
+    if (arr.length <= 1)
+      return arr;
+    int tmp = arr[0];
+    arr[0] = arr[arr.length - 1];
+    arr[arr.length - 1] = tmp;
+    return arr;
+  }
 
   public static void main(String[] args) {
     Tour1025 t = new Tour1025();
