@@ -93,6 +93,77 @@ public class Tour1025 {
     return (year - 1) / 100 + 1;
   }
 
+  int arrayMaxConsecutiveSum(int[] inputArray, int k) {
+
+    int result = 0, currentSum = 0;
+
+    for (int i = 0; i < k - 1; i++) {
+      currentSum += inputArray[i];
+    }
+    for (int i = k - 1; i < inputArray.length; i++) {
+      currentSum += inputArray[i];
+      if (currentSum > result) {
+        result = currentSum;
+      }
+      currentSum -= inputArray[i - k + 1];
+    }
+
+    return result;
+  }
+
+  int divideAsLongAsPossible(int n, int d) {
+    if (n % d != 0)
+      return n;
+    return divideAsLongAsPossible(n / d, d);
+  }
+
+  void merge(int[] sequence, int left, int middle, int right) {
+    int[] result = new int[right - left];
+    int i, j;
+    int k = 0;
+
+    for (i = left, j = middle; i < middle && j < right;) {
+      if (sequence[i] < sequence[j]) {
+        result[k++] = sequence[i];
+        i++;
+      } else {
+        result[k++] = sequence[j];
+        j++;
+      }
+    }
+
+    while (i < middle) {
+      result[k++] = sequence[i];
+      i++;
+    }
+
+    while (j < right) {
+      result[k++] = sequence[j];
+      j++;
+    }
+
+    for (i = left; i < right; i++) {
+      sequence[i] = result[i - left];
+    }
+  }
+
+  void split(int[] sequence, int left, int right) {
+    if (left + 1 == right) {
+      return;
+    }
+    int middle = (left + right) / 2;
+    split(sequence, left, middle);
+    split(sequence, middle, right);
+    merge(sequence, left, middle, right);
+  }
+
+  int[] mergeSort(int[] sequence) {
+    split(sequence, 0, sequence.length);
+
+    return sequence;
+  }
+
+
   public static void main(String[] args) {
     Tour1025 t = new Tour1025();
     int[] values = {6, 2, 3, 8};
