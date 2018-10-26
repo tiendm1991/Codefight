@@ -1,173 +1,158 @@
 package tiendm.codefight;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class Util {
-	boolean binarySearch(int[] arr, int i, int begin, int end) {
-		if (begin == end) {
-			return arr[begin] == i;
-		}
-		int mid = (begin + end) / 2;
-		if (arr[mid] == i)
-			return true;
-		else if (arr[mid] < i) {
-			return binarySearch(arr, i, mid + 1, end);
-		} else {
-			return binarySearch(arr, i, begin, mid);
-		}
-	}
 
-	boolean isPrime(int x) {
-		if (x == 2 || x == 3)
-			return true;
-		for (int i = 2; i <= x / 2; i++) {
-			if (x % i == 0)
-				return false;
-		}
-		return true;
-	}
+  void swap(int[] arr, int i, int j) {
+    int tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
 
-	int chessKnight(String cell) {
-		int row = Integer.parseInt("" + cell.charAt(1)), column = cell.charAt(0) - 'a' + 1;
-		int[][] steps = { { -2, -1 }, { -1, -2 }, { 1, -2 }, { 2, -1 }, { 2, 1 }, { 1, 2 }, { -1, 2 }, { -2, 1 } };
-		int answer = 0;
+  <T> void swapObj(T[] arr, int i, int j) {
+    T tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
 
-		for (int i = 0; i < steps.length; i++) {
-			int tmpRow = row + steps[i][0];
-			int tmpColumn = column + steps[i][1];
-			if (tmpRow >= 1 && tmpRow <= 8 && tmpColumn >= 1 && tmpColumn <= 8) {
-				answer++;
-			}
-		}
+  boolean binarySearch(int[] arr, int i, int begin, int end) {
+    if (begin == end) {
+      return arr[begin] == i;
+    }
+    int mid = (begin + end) / 2;
+    if (arr[mid] == i)
+      return true;
+    else if (arr[mid] < i) {
+      return binarySearch(arr, i, mid + 1, end);
+    } else {
+      return binarySearch(arr, i, begin, mid);
+    }
+  }
 
-		return answer;
-	}
+  boolean isPrime(int x) {
+    if (x == 2 || x == 3)
+      return true;
+    for (int i = 2; i <= x / 2; i++) {
+      if (x % i == 0)
+        return false;
+    }
+    return true;
+  }
 
-	int countSumOfTwoRepresentations(int n, int l, int r) {
-		int result = 0;
-		for (int a = l; a <= r; a++) {
-			for (int b = a; b <= r; b++) {
-				if (a + b == n) {
-					result++;
-					break;
-				}
-			}
-		}
-		return result;
-	}
+  int chessKnight(String cell) {
+    int row = Integer.parseInt("" + cell.charAt(1)), column = cell.charAt(0) - 'a' + 1;
+    int[][] steps = {{-2, -1}, {-1, -2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}};
+    int answer = 0;
 
-	int countSumOfTwoRepresentations2(int n, int l, int r) {
-		int c = 0;
-		for (int i = l; i <= r; i++) {
-			if (i <= n - i && n - i <= r)
-				c++;
-		}
-		return c;
-	}
-
-	int countSumOfTwoRepresentations3(int n, int l, int r) {
-		int result = 0;
-
-		for (int i = 1; i <= n - i; i++) {
-			if (l <= i && n - i <= r) {
-				result++;
-			}
-		}
-
-		return result;
-	}
-
-	int digitSum(int x) {
-		int s = 0;
-		while (x > 0) {
-			s += x % 10;
-			x /= 10;
-		}
-		return s;
-	}
-
-	int gcd(int a, int b) {
-		while (a % b != 0) {
-			int tmp = b;
-			b = a % b;
-			a = tmp;
-		}
-		return b;
-	}
-
-	int fact(int n) {
-		if (n == 0)
-			return 1;
-		return fact(n - 1) * n;
-	}
-	
-	int combine1(int k, int n) {
-	  return fact(n) / (fact(k) * fact(n-k));
-	}
-	
-	int combine2(int k, int n) {
-      if(k == 0 || k == n) return 1;
-      if(k == 1 || k == n-1) return n;
-      return combine2(k-1, n-1) + combine2(k, n-1);
+    for (int i = 0; i < steps.length; i++) {
+      int tmpRow = row + steps[i][0];
+      int tmpColumn = column + steps[i][1];
+      if (tmpRow >= 1 && tmpRow <= 8 && tmpColumn >= 1 && tmpColumn <= 8) {
+        answer++;
+      }
     }
 
-	int arrayMinimumAboveBound(int[] inputArray, int bound) {
-		Arrays.sort(inputArray);
-		for (int x : inputArray) {
-			if (x > bound)
-				return x;
-		}
-		return -1;
-	}
+    return answer;
+  }
 
-	double distance(int x1, int x2, int y1, int y2) {
-		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-	}
+  int countSumOfTwoRepresentations(int n, int l, int r) {
+    int result = 0;
+    for (int a = l; a <= r; a++) {
+      for (int b = a; b <= r; b++) {
+        if (a + b == n) {
+          result++;
+          break;
+        }
+      }
+    }
+    return result;
+  }
 
-	int indexOf(int[] values, int check) {
-		for (int i = 0; i < values.length; i++) {
-			if (values[i] == check) {
-				return i;
-			}
-		}
-		return -1;
-	}
+  int countSumOfTwoRepresentations2(int n, int l, int r) {
+    int c = 0;
+    for (int i = l; i <= r; i++) {
+      if (i <= n - i && n - i <= r)
+        c++;
+    }
+    return c;
+  }
 
-	int bfsComponentSize(boolean[][] matrix) {
+  int countSumOfTwoRepresentations3(int n, int l, int r) {
+    int result = 0;
 
-		ArrayList<Boolean> visited = new ArrayList<>();
-		LinkedList<Integer> queue = new LinkedList<>();
-		int componentSize = 0;
+    for (int i = 1; i <= n - i; i++) {
+      if (l <= i && n - i <= r) {
+        result++;
+      }
+    }
 
-		for (int i = 0; i < matrix.length; i++) {
-			visited.add(false);
-		}
+    return result;
+  }
 
-		visited.set(1, true);
-		queue.add(1);
+  int digitSum(int x) {
+    int s = 0;
+    while (x > 0) {
+      s += x % 10;
+      x /= 10;
+    }
+    return s;
+  }
 
-		while (queue.size() > 0) {
-			int currentVertex = queue.pop();
-			visited.set(currentVertex, true);
-			componentSize++;
-			for (int nextVertex = 0; nextVertex < matrix.length; nextVertex++) {
-				if (matrix[currentVertex][nextVertex] && !visited.get(nextVertex)) {
-					visited.set(nextVertex, true);
-					queue.add(nextVertex);
-				}
-			}
-		}
+  int gcd(int a, int b) {
+    while (a % b != 0) {
+      int tmp = b;
+      b = a % b;
+      a = tmp;
+    }
+    return b;
+  }
 
-		return componentSize;
-	}
+  int fact(int n) {
+    if (n == 0)
+      return 1;
+    return fact(n - 1) * n;
+  }
 
-	public static void main(String[] args) {
-		Util u = new Util();
-		int k = 6;
-		int n = 12;
-		System.out.println(u.combine1(k, n));
-		System.out.println(u.combine2(k, n));
-	}
+  int combine1(int k, int n) {
+    return fact(n) / (fact(k) * fact(n - k));
+  }
+
+  int combine2(int k, int n) {
+    if (k == 0 || k == n)
+      return 1;
+    if (k == 1 || k == n - 1)
+      return n;
+    return combine2(k - 1, n - 1) + combine2(k, n - 1);
+  }
+
+  int arrayMinimumAboveBound(int[] inputArray, int bound) {
+    Arrays.sort(inputArray);
+    for (int x : inputArray) {
+      if (x > bound)
+        return x;
+    }
+    return -1;
+  }
+
+  double distance(int x1, int x2, int y1, int y2) {
+    return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  }
+
+  int indexOf(int[] values, int check) {
+    for (int i = 0; i < values.length; i++) {
+      if (values[i] == check) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static void main(String[] args) {
+    Util u = new Util();
+    int k = 6;
+    int n = 12;
+    System.out.println(u.combine1(k, n));
+    System.out.println(u.combine2(k, n));
+  }
 }

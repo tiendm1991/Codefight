@@ -1,8 +1,6 @@
 package tiendm.codefight.tournament.aug;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Tour1308 {
 	int summaryProficiency(int[] a, int n, int m) {
@@ -16,9 +14,6 @@ public class Tour1308 {
 	            count++;
 	        }
 	    }
-	    int x = 3;
-	    List<Integer> z = new ArrayList<>();
-	    z.add(x);
 	    return sum;
 	}
 	
