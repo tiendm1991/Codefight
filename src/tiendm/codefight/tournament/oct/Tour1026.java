@@ -282,9 +282,28 @@ public class Tour1026 {
     return true;
   }
 
+  int[] powersOfTwo(int n) {
+    ArrayList<Integer> ans = new ArrayList<>();
+    int cur = 1;
+    while (n > 0) {
+      if (n % 2 == 1) {
+        ans.add(cur);
+      }
+      n /= 2;
+      cur *= 2;
+    }
+
+    int[] a = new int[ans.size()];
+    for (int i = 0; i < a.length; i++) {
+      a[i] = ans.get(i);
+    }
+
+    return a;
+  }
+
   public static void main(String[] args) {
     Tour1026 t = new Tour1026();
     int[] values = {6, 2, 3, 8};
-    System.out.println(t.pagesNumbering(13));
+    System.out.println(t.powersOfTwo(15));
   }
 }
