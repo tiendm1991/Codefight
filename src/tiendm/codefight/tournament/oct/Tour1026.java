@@ -190,10 +190,101 @@ public class Tour1026 {
     return answer;
   }
 
+  int largestFullBinaryTree(int[] parent) {
+
+    class Graph {
+      ArrayList<Integer>[] edges;
+      int maxBinTree;
+
+      Graph(int[] parent) {
+        maxBinTree = 1;
+        edges = new ArrayList[parent.length];
+        for (int i = 0; i < edges.length; i++) {
+          edges[i] = new ArrayList();
+        }
+        for (int i = 1; i < parent.length; i++) {
+          edges[parent[i]].add(i);
+        }
+      }
+
+      int dfs(int v) {
+        int firstMax = -1;
+        int secondMax = -1;
+        for (int u : edges[v]) {
+          int curMax = dfs(u);
+          if (curMax > firstMax) {
+            secondMax = firstMax;
+            firstMax = curMax;
+          } else if (curMax > secondMax) {
+            secondMax = curMax;
+          }
+        }
+        if (secondMax == -1) {
+          return 1;
+        }
+        int result = 1 + firstMax + secondMax;
+        if (result > maxBinTree) {
+          maxBinTree = result;
+        }
+        return result;
+      }
+    }
+
+    Graph g = new Graph(parent);
+    g.dfs(0);
+    return g.maxBinTree;
+  }
+
+  int commonCharacterCount2(String s1, String s2) {
+    HashMap<Character, Integer> map1 = new HashMap<>();
+    HashMap<Character, Integer> map2 = new HashMap<>();
+    int answer = 0;
+    for (int i = 0; i < s1.length(); i++) {
+      char ch = s1.charAt(i);
+      map1.put(ch, map1.containsKey(ch) ? (map1.get(ch) + 1) : 1);
+    }
+    for (int i = 0; i < s2.length(); i++) {
+      char ch = s2.charAt(i);
+      map2.put(ch, map2.containsKey(ch) ? (map2.get(ch) + 1) : 1);
+    }
+    for (char ch = 'a'; ch <= 'z'; ch++) {
+      if (map1.containsKey(ch) && map2.containsKey(ch)) {
+        answer += Math.min(map1.get(ch), map2.get(ch));
+      }
+    }
+    return answer;
+  }
+
+  int pagesNumbering(int n) {
+
+    int tenPower = 1, digitsPerPage = 1, result = 0;
+
+    while (tenPower <= n) {
+      result += tenPower * 9 * digitsPerPage;
+      tenPower *= 10;
+      digitsPerPage++;
+    }
+    result += (n - tenPower + 1) * (digitsPerPage - 1);
+
+    return result;
+  }
+
+  boolean isMonotonous(int[] sequence) {
+    if (sequence.length == 1) {
+      return true;
+    }
+    int direction = sequence[1] - sequence[0];
+    for (int i = 0; i < sequence.length - 1; i++) {
+      if (direction * (sequence[i + 1] - sequence[i]) <= 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   public static void main(String[] args) {
     Tour1026 t = new Tour1026();
     int[] values = {6, 2, 3, 8};
-    System.out.println(t.commonCharacterCount("aabcc", "adcaa"));
+    System.out.println(t.pagesNumbering(13));
   }
 }
