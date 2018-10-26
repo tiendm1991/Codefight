@@ -2,6 +2,7 @@ package tiendm.codefight.tournament.oct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -134,9 +135,65 @@ public class Tour1026 {
     return componentSize;
   }
 
+  int[] bfsDistancesUnweightedGraph(boolean[][] matrix, int startVertex) {
+
+    boolean[] visited = new boolean[matrix.length];
+    LinkedList<Integer> queue = new LinkedList<>();
+    int[] distance = new int[matrix.length];
+
+    visited[startVertex] = true;
+    queue.add(startVertex);
+    while (queue.size() != 0) {
+      int currentVertex = queue.pop();
+      visited[currentVertex] = true;
+      for (int nextVertex = 0; nextVertex < matrix.length; nextVertex++) {
+        if (matrix[currentVertex][nextVertex] && !visited[nextVertex]) {
+          visited[nextVertex] = true;
+          distance[nextVertex] = distance[currentVertex] + 1;
+          queue.add(nextVertex);
+        }
+      }
+    }
+
+    return distance;
+  }
+
+  int kthDivisor(int n, int k) {
+    int c = 0;
+    for (int i = 1; i <= n; i++) {
+      if (n % i == 0)
+        c++;
+      if (c == k)
+        return i;
+    }
+    return -1;
+  }
+
+  int commonCharacterCount(String s1, String s2) {
+    HashMap<Character, Integer> map1 = new HashMap<>();
+    HashMap<Character, Integer> map2 = new HashMap<>();
+    int answer = 0;
+    for (int i = 0; i < s1.length(); i++) {
+      char ch = s1.charAt(i);
+      map1.put(ch, map1.containsKey(ch) ? (map1.get(ch) + 1) : 1);
+    }
+    for (int i = 0; i < s2.length(); i++) {
+      char ch = s2.charAt(i);
+      map2.put(ch, map2.containsKey(ch) ? (map2.get(ch) + 1) : 1);
+    }
+    for (char ch = 'a'; ch <= 'z'; ch++) {
+      try {
+        answer += Math.min(map1.get(ch), map2.get(ch));
+      } catch (NullPointerException e) {
+      }
+    }
+    return answer;
+  }
+
+
   public static void main(String[] args) {
     Tour1026 t = new Tour1026();
     int[] values = {6, 2, 3, 8};
-    System.out.println(t.differentValuesInMultiplicationTable(3, 2));
+    System.out.println(t.commonCharacterCount("aabcc", "adcaa"));
   }
 }

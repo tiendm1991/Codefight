@@ -1,8 +1,6 @@
 package tiendm.codefight.challenge.august;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class Snake {
@@ -74,7 +72,7 @@ public class Snake {
 	
 	int kthDivisor(int n, int k) {
 	    int c = 0;
-	    for(int i = 0; i < n; i++){
+	    for(int i = 1; i < n; i++){
 	        if(n % i == 0) c++;
 	        if(c == k) return i;
 	    }
