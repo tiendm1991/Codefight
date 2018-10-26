@@ -102,6 +102,16 @@ public class Util {
 			return 1;
 		return fact(n - 1) * n;
 	}
+	
+	int combine1(int k, int n) {
+	  return fact(n) / (fact(k) * fact(n-k));
+	}
+	
+	int combine2(int k, int n) {
+      if(k == 0 || k == n) return 1;
+      if(k == 1 || k == n-1) return n;
+      return combine2(k-1, n-1) + combine2(k, n-1);
+    }
 
 	int arrayMinimumAboveBound(int[] inputArray, int bound) {
 		Arrays.sort(inputArray);
@@ -155,6 +165,9 @@ public class Util {
 
 	public static void main(String[] args) {
 		Util u = new Util();
-		System.out.println(u.gcd(15, 9));
+		int k = 6;
+		int n = 12;
+		System.out.println(u.combine1(k, n));
+		System.out.println(u.combine2(k, n));
 	}
 }
