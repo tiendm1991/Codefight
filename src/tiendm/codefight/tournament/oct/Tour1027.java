@@ -1,6 +1,7 @@
 package tiendm.codefight.tournament.oct;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Tour1027 {
@@ -246,6 +247,25 @@ public class Tour1027 {
 		}
 
 		return position;
+	}
+
+	int knapsackLight(int value1, int weight1, int value2, int weight2, int maxW) {
+
+		if (weight1 + weight2 <= maxW) {
+			return value1 + value2;
+		}
+		if (Math.min(weight1, weight2) > maxW) {
+			return 0;
+		}
+		if (weight1 <= maxW && (value1 >= value2 || weight2 > maxW)) {
+			return value1;
+		}
+		return value2;
+	}
+
+	boolean triangleExistence(int[] sides) {
+		Arrays.sort(sides);
+		return sides[0] + sides[1] > sides[2];
 	}
 
 	public static void main(String[] args) {
