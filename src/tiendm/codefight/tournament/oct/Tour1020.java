@@ -85,6 +85,46 @@ public class Tour1020 {
 		return s.length();
 	}
 
+	int equidistantTriples(int[] coordinates) {
+
+		int ans = 0;
+		for (int i = 1; i < coordinates.length - 1; i++) {
+			int left = i - 1;
+			int right = i + 1;
+			while (left >= 0 && right < coordinates.length) {
+				int distL = coordinates[i] - coordinates[left];
+				int distR = coordinates[right] - coordinates[i];
+				if (distL == distR) {
+					ans++;
+					left--;
+					right++;
+				} else if (distL < distR) {
+					left--;
+				} else {
+					right++;
+				}
+			}
+		}
+
+		return ans;
+	}
+
+	int firstNotDivisible(int[] divisors, int start) {
+
+		for (int answer = start;; answer++) {
+			boolean correct = true;
+			for (int i = 0; i < divisors.length; i++) {
+				if (answer % divisors[i] == 0) {
+					correct = false;
+					break;
+				}
+			}
+			if (correct) {
+				return answer;
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		Tour1020 t = new Tour1020();
 		int[] values = { 1, 3, 4, 2 };

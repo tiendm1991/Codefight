@@ -191,27 +191,6 @@ public class Tour1023 {
 		return IntStream.range(0, array1.length).allMatch(i -> array1[i].length == array2[i].length);
 	}
 
-	int stringsConstruction(String a, String b) {
-		char[] charA = a.toCharArray();
-		char[] charB = b.toCharArray();
-		int[] occ = new int[26];
-		for (char ca : charA) {
-			for (char cb : charB) {
-				if (ca == cb) {
-					occ[cb - 'a']++;
-				}
-			}
-		}
-		int min = b.length();
-		for (int i = 0; i < charA.length; i++) {
-			int x = occ[charA[i] - 'a'];
-			if (x < min) {
-				min = x;
-			}
-		}
-		return min;
-	}
-
 	boolean checkSameElementExistence(int[] arr1, int[] arr2) {
 
 		int i = 0;
@@ -358,10 +337,10 @@ public class Tour1023 {
 
 		return result;
 	}
-	
+
 	public static void main(String[] args) {
 		Tour1023 t = new Tour1023();
 		int[] values = { 6, 2, 3, 8 };
-		System.out.println(t.stringsConstruction("abc", "abcca"));
+		System.out.println(t);
 	}
 }

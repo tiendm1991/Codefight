@@ -40,7 +40,7 @@ public class Tour1509 {
 	    return a % 10;
 	}
 
-	int dfsComponentSize(boolean[][] matrix, int vertex) {
+	int bfsComponentSize(boolean[][] matrix, int vertex) {
 	    Set<Integer> set= new HashSet<>();
 	    set.add(vertex);
 	    Queue<Integer> q = new LinkedList<>();
