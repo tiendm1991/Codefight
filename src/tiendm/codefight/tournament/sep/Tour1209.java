@@ -32,7 +32,7 @@ public class Tour1209 {
 
 		for (int i = 0; i < adj.length; i++)
 			for (int j = 0; j < adj.length; j++)
-				if (i != j && adj[i][j] == adj[j][i])
+				if ((i != j && adj[i][j] == adj[j][i]) || (i == j && adj[i][j] == 1))
 					return false;
 		return true;
 	}

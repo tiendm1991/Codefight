@@ -1,7 +1,10 @@
 package tiendm.codefight.tournament.oct;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Tour1028 {
 	boolean bettingGame(int[] l) {
@@ -126,6 +129,109 @@ public class Tour1028 {
 		}
 
 		return answer;
+	}
+
+	int[] digitalSumSort(int[] a) {
+
+		class Helper {
+			int digitalSum(int n) {
+				int sum = 0;
+				while (n > 0) {
+					sum += n % 10;
+					n /= 10;
+				}
+				return sum;
+			}
+		}
+		Helper h = new Helper();
+
+		Map<Integer, ArrayList<Integer>> buckets = new HashMap<>();
+		for (int i = 0; i < a.length; i++) {
+			int sum = h.digitalSum(a[i]);
+			if (!buckets.containsKey(sum)) {
+				buckets.put(sum, new ArrayList<Integer>());
+			}
+			buckets.get(sum).add(a[i]);
+		}
+
+		int[] b = new int[a.length];
+		int cnt = 0;
+		for (int sum : buckets.keySet()) {
+			ArrayList<Integer> bucket = buckets.get(sum);
+			Collections.sort(bucket);
+			for (int i = 0; i < bucket.size(); i++) {
+				b[cnt++] = bucket.get(i);
+			}
+		}
+
+		return b;
+	}
+
+	boolean regularBracketSequence1(String sequence) {
+
+		int balance = 0;
+		for (int i = 0; i < sequence.length(); i++) {
+			if (sequence.charAt(i) == '(') {
+				balance++;
+			} else {
+				balance--;
+			}
+			if (balance < 0) {
+				return false;
+			}
+		}
+		if (balance != 0) {
+			return false;
+		}
+		return true;
+	}
+
+	int longestSequence(int[] a) {
+
+		int best = 1;
+		for (int i = 0; i < a.length; i++) {
+			for (int j = i + 1; j < a.length; j++) {
+				int diff = a[j] - a[i];
+				if (diff == 0) {
+					continue;
+				}
+				int cur = 1;
+				int last = a[i];
+				for (int k = j; k < a.length; k++) {
+					if (a[k] - last == diff) {
+						cur++;
+						last = a[k];
+					}
+				}
+				if (cur > best) {
+					best = cur;
+				}
+			}
+		}
+
+		return best;
+	}
+
+	int numberOfTriangles2(int[] sticks) {
+
+		int ans = 0;
+		for (int i = 0; i < sticks.length - 2; i++) {
+			for (int j = i + 1; j < sticks.length - 1; j++) {
+				int mx = sticks[i] + sticks[j];
+				int l = j, r = sticks.length;
+				while (r - l > 1) {
+					int m = (l + r) / 2;
+					if (sticks[m] >= mx) {
+						r = m;
+					} else {
+						l = m;
+					}
+				}
+				ans += r - j - 1;
+			}
+		}
+
+		return ans;
 	}
 
 	public static void main(String[] args) {
