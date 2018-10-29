@@ -10,28 +10,27 @@ public class EquitableMeetup {
 			result[i] = 1;
 			candy[i] = friendsRoutes[i][0];
 		}
-		int minIdx = minIdx(candy);
-		int maxIdx = maxIdx(candy);
+		int[] idx = getIdx(candy);
+		int minIdx = idx[0];
+		int maxIdx = idx[1];
 		int min = candy[maxIdx] - candy[minIdx];
-		while (valid(friendsRoutes, route, minIdx)) {
-			if (min == 1) {
-				return route;
-			}
+		while (min > 1 && valid(friendsRoutes, route, minIdx)) {
 			candy[minIdx] += friendsRoutes[minIdx][route[minIdx]];
 			route[minIdx]++;
-			minIdx = minIdx(candy);
-			maxIdx = maxIdx(candy);
+			idx = getIdx(candy);
+			minIdx = idx[0];
+			maxIdx = idx[1];
 			int cost = candy[maxIdx] - candy[minIdx];
-			if(cost < min){
+			if (cost < min) {
 				min = cost;
 				copy(route, result);
 			}
 		}
 		return result;
 	}
-	
-	void copy(int[] from, int[] to){
-		for(int i = 0; i < from.length; i++){
+
+	void copy(int[] from, int[] to) {
+		for (int i = 0; i < from.length; i++) {
 			to[i] = from[i];
 		}
 	}
@@ -45,31 +44,24 @@ public class EquitableMeetup {
 		return true;
 	}
 
-	int minIdx(int[] candy) {
-		int min = candy[0], minIdx = 0;
+	int[] getIdx(int[] candy) {
+		int min = candy[0], minIdx = 0, max = candy[0], maxIdx = 0;
 		for (int i = 1; i < candy.length; i++) {
 			if (candy[i] < min) {
 				min = candy[i];
 				minIdx = i;
 			}
-		}
-		return minIdx;
-	}
-
-	int maxIdx(int[] candy) {
-		int max = candy[0], maxIdx = 0;
-		for (int i = 1; i < candy.length; i++) {
 			if (candy[i] > max) {
 				max = candy[i];
 				maxIdx = i;
 			}
 		}
-		return maxIdx;
+		return new int[] {minIdx, maxIdx};
 	}
-
+	
 	public static void main(String[] args) {
 		EquitableMeetup e = new EquitableMeetup();
-		int[][] friendsRoutes = { { 1,2,1,1,1,1 }, { 5, 4, 7, 4, 5, 9 }, { 3, 3, 3, 3, 3, 3, 3, 3, 3 } };
+		int[][] friendsRoutes = { { 1, 2, 1, 1, 1, 1 }, { 5, 4, 7, 4, 5, 9 }, { 3, 3, 3, 3, 3, 3, 3, 3, 3 } };
 		int[] route = e.equitableMeetup(friendsRoutes);
 		System.out.println(route);
 	}
