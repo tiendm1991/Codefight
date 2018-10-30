@@ -1,8 +1,5 @@
 package tiendm.codefight.tournament.oct;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Tour1006 {
 	String reflectString(String inputString) {
 		String s = "";
@@ -39,6 +36,32 @@ public class Tour1006 {
 		}
 
 		return ans;
+	}
+
+	int maximalEven(int[] inputArray) {
+
+		int answer = 0;
+		for (int i = 0; i < inputArray.length; i++) {
+			if (inputArray[i] % 2 == 0 && inputArray[i] > answer) {
+				answer = inputArray[i];
+			}
+		}
+		return answer;
+	}
+
+	String insertDashes(String inputString) {
+		String[] words = inputString.split(" ");
+		for (int i = 0; i < words.length; i++) {
+			words[i] = words[i].replace("", "-");
+			if (words[i].length() > 2) {
+				words[i] = words[i].substring(1, words[i].length() - 1);
+			}
+		}
+		String ans = "";
+		for (int i = 0; i < words.length - 1; i++) {
+			ans += words[i] + " ";
+		}
+		return ans + words[words.length - 1];
 	}
 
 	public static void main(String[] args) {
