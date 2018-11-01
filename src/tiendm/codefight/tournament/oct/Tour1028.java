@@ -180,10 +180,7 @@ public class Tour1028 {
 				return false;
 			}
 		}
-		if (balance != 0) {
-			return false;
-		}
-		return true;
+		return balance == 0;
 	}
 
 	int longestSequence(int[] a) {
