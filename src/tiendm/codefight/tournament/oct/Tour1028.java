@@ -231,6 +231,21 @@ public class Tour1028 {
 		return ans;
 	}
 
+	int minimalNumberOfCoins(int[] coins, int price) {
+
+		int result = 0;
+
+		for (int i = coins.length - 1; i >= 0; i--) {
+			result += price / coins[i];
+			price %= coins[i];
+		}
+
+		if (price != 0) {
+			return -1;
+		}
+		return result;
+	}
+
 	public static void main(String[] args) {
 		Tour1028 t = new Tour1028();
 		int[] values = { 2, 3, 4 };
