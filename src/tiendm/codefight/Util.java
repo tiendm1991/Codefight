@@ -125,6 +125,14 @@ public class Util {
 			return n;
 		return combine2(k - 1, n - 1) + combine2(k, n - 1);
 	}
+	
+	int combine3(int n, int k) {
+		if (k == 0 || k == n)
+			return 1;
+		if (k == 1 || k == n - 1)
+			return n;
+		return combine2(n - 1, k - 1) + combine2(n-1, k);
+	}
 
 	int fibo(int n) {
 		if (n == 0)

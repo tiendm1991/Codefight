@@ -3,8 +3,12 @@ package tiendm.codefight.tournament.nov;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * @author tien.dinhmanh
@@ -301,10 +305,260 @@ public class Tour1104 {
 		return chart.length - max;
 	}
 
+	int sequencePeakElement(int[] sequence) {
+		int left = 1;
+		int right = sequence.length - 2;
+		while (left < right) {
+			int middle = (right + left) / 2;
+			if (sequence[middle] > Math.max(sequence[middle - 1], sequence[middle + 1])) {
+				left = right = middle;
+				break;
+			}
+			if (sequence[middle - 1] < sequence[middle]) {
+				left = middle + 1;
+			} else {
+				right = middle - 1;
+			}
+		}
+		return sequence[left];
+	}
+
+	int sequenceElement(int[] a, int n) {
+
+		final int MOD = (int) 1e5;
+		List<Integer> seq = new ArrayList<>();
+		for (int i = 0; i < 5; i++) {
+			seq.add(a[i]);
+		}
+
+		int lastFive = a[0] * (int) 1e4 + a[1] * (int) 1e3 + a[2] * (int) 1e2 + a[3] * (int) 1e1 + a[4] * (int) 1e0;
+		Map<Integer, Integer> was = new HashMap<>();
+		was.put(lastFive, 4);
+
+		for (int i = 5;; i++) {
+			seq.add((seq.get(i - 1) + seq.get(i - 2) + seq.get(i - 3) + seq.get(i - 4) + seq.get(i - 5)) % 10);
+			lastFive = (lastFive * 10 + seq.get(i)) % MOD;
+			if (was.containsKey(lastFive)) {
+				int last = was.get(lastFive);
+				return seq.get(n % (i - last));
+			} else {
+				was.put(lastFive, i);
+			}
+		}
+	}
+
+	int crossingSum(int[][] matrix, int row, int column) {
+
+		int result = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			result += matrix[i][column];
+		}
+		for (int i = 0; i < matrix[0].length; i++) {
+			result += matrix[row][i];
+		}
+		result -= matrix[row][column];
+
+		return result;
+	}
+
+	String[] isDivisibleBy6(String inputString) {
+
+		int digitSum = 0;
+		char leftBound = '0', rightBound = '9';
+		ArrayList<String> answer = new ArrayList<>();
+		char[] mask = inputString.toCharArray();
+		int asteriskPos = -1;
+
+		for (int i = 0; i < mask.length; i++) {
+			if (leftBound <= mask[i] && mask[i] <= rightBound) {
+				digitSum += mask[i] - '0';
+			} else {
+				asteriskPos = i;
+			}
+		}
+
+		for (int i = 0; i < 10; i++) {
+			if ((digitSum + i) % 3 == 0) {
+				mask[asteriskPos] = (char) (leftBound + i);
+				if ((mask[mask.length - 1] - leftBound) % 2 == 0) {
+					answer.add(String.valueOf(mask));
+				}
+			}
+		}
+
+		return answer.toArray(new String[0]);
+	}
+
+	String formatString(String input) {
+		input = input.trim();
+		String[] split = input.split(" ");
+		StringBuilder formattedString = new StringBuilder();
+		for (String s : split) {
+			if (!s.equals(" ") && !s.equals("")) {
+				formattedString.append(" ").append(s.trim());
+			}
+		}
+		return formattedString.substring(1).toString();
+	}
+
+	String formatString2(String input) {
+		input = input.trim();
+		String[] split = input.split(" ");
+		return Arrays.asList(split).stream().filter(x -> !x.equals("")).collect(Collectors.joining(" "));
+	}
+
+	boolean regularBracketSequence(String sequence) {
+		char[] chars = sequence.toCharArray();
+		Stack<Character> s = new Stack<>();
+		for (char c : chars) {
+			if (c == '(') {
+				s.push(c);
+			} else if (c == ')') {
+				if (s.isEmpty())
+					return false;
+				s.pop();
+			}
+		}
+		return s.isEmpty();
+	}
+
+	int smallestNumber(int n) {
+		return (int) Math.pow(10, n - 1);
+	}
+
+	boolean isSumOfConsecutive(int n) {
+		int result = 0;
+		for (int start = 1; start < n; start++) {
+			int number = n, subtrahend = start;
+			while (number > 0) {
+				number -= subtrahend;
+				subtrahend++;
+			}
+			if (number == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	int countIncreasingSequences(int n, int k) {
+		if (n == 0 || n == k)
+			return 1;
+		if (n == 1 || n == k - 1)
+			return k;
+		return countIncreasingSequences(n - 1, k - 1) + countIncreasingSequences(n, k - 1);
+	}
+
+	int binarySearch(int[] inputArray, int searchElement) {
+
+		int minIndex = -1;
+		int maxIndex = inputArray.length;
+		int currentIndex;
+		int currentElement;
+
+		while (minIndex < maxIndex - 1) {
+			currentIndex = (minIndex + maxIndex) / 2;
+			currentElement = inputArray[currentIndex];
+			if (currentElement < searchElement) {
+				minIndex = currentIndex;
+			} else {
+				maxIndex = currentIndex;
+			}
+		}
+
+		if (maxIndex == inputArray.length || inputArray[maxIndex] != searchElement) {
+			return -1;
+		}
+		return maxIndex;
+	}
+
+	boolean checkEqualFrequency(int[] inputArray) {
+
+		int numberOfEqual = 1;
+
+		Arrays.sort(inputArray);
+
+		while (numberOfEqual < inputArray.length && inputArray[numberOfEqual - 1] == inputArray[numberOfEqual]) {
+			numberOfEqual++;
+		}
+
+		if (inputArray.length % numberOfEqual != 0) {
+			return false;
+		}
+
+		for (int i = 0; i < inputArray.length; i += numberOfEqual) {
+			if (i != 0 && inputArray[i] == inputArray[i - 1]) {
+				return false;
+			}
+			for (int j = i + 1; j < i + numberOfEqual; j++) {
+				if (inputArray[j] != inputArray[j - 1]) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	String[] allLongestStrings(String[] inputArray) {
+
+		ArrayList<String> answer = new ArrayList<>(Arrays.asList(inputArray[0]));
+		for (int i = 1; i < inputArray.length; i++) {
+			if (inputArray[i].length() == answer.get(0).length()) {
+				answer.add(inputArray[i]);
+			}
+			if (inputArray[i].length() > answer.get(0).length()) {
+				answer = new ArrayList<>(Arrays.asList(inputArray[i]));
+			}
+		}
+		return answer.toArray(new String[0]);
+	}
+
+	int[] powersOfTwo(int n) {
+
+		ArrayList<Integer> ans = new ArrayList<>();
+		int cur = 1;
+		while (n > 0) {
+			if (n % 2 == 1) {
+				ans.add(cur);
+			}
+			cur *= 2;
+			n /= 2;
+		}
+
+		int[] a = new int[ans.size()];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = ans.get(i);
+		}
+
+		return a;
+	}
+
+	int largestNumber(int n) {
+
+		int res = 0;
+
+		for (int i = 1; i <= n; i++) {
+			res = res * 10 + 9;
+		}
+
+		return res;
+	}
+
+	int[] threeAndFour(int n) {
+		ArrayList<Integer> result = new ArrayList<>();
+		for (int counter = 0; counter < n; counter++) {
+			if (counter % 3 == 0 && counter % 4 == 0)
+				result.add(counter);
+		}
+		return result.stream().mapToInt(i -> i).toArray();
+	}
+
 	public static void main(String[] args) {
 		Tour1104 t = new Tour1104();
 		int[] values = { 3, 2, 6, 4, 5, 1, 7 };
 		String[] s = { "a", "a", "ab", "ab", "abc" };
+		String[] split = " abc   a aa  a a ".split(" ");
 		System.out.println(t.chartFix(values));
 	}
 }
