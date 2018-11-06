@@ -296,6 +296,23 @@ public class Tour1024 {
 		return (maxX - minX) * (maxY - minY);
 	}
 
+	boolean isCaseInsensitivePalindrome(String inputString) {
+
+		for (int i = 0; i < inputString.length() / 2; i++) {
+			char[] c = { inputString.charAt(i), inputString.charAt(inputString.length() - i - 1) };
+			for (int j = 0; j < 2; j++) {
+				if (c[j] >= 'A' && c[j] <= 'Z') {
+					c[j] = (char) (c[j] + 'a' - 'A');
+				}
+			}
+			if (c[0] != c[1]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public static void main(String[] args) {
 		Tour1024 t = new Tour1024();
 		int[] values = { 6, 2, 3, 8 };
