@@ -269,7 +269,7 @@ public class Tour1023 {
 	}
 
 	String capitalizeVowelsRegExp(String input) {
-		String s = "aeiou";
+		String s = "aeiouy";
 		String r = "";
 		for (int i = 0; i < input.length(); i++) {
 			String x = input.charAt(i) + "";
