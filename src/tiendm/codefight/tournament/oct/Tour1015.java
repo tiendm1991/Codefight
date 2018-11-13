@@ -32,21 +32,6 @@ public class Tour1015 {
 		return s;
 	}
 
-	int sumBelowBound(int bound) {
-
-		int left = 0, right = bound + 1;
-		while (right - left > 1) {
-			int middle = (left + right) / 2;
-			if (middle * (middle + 1) / 2 <= bound) {
-				left = middle;
-			} else {
-				right = middle;
-			}
-		}
-
-		return left;
-	}
-
 	boolean chessBoardCellColor(String cell1, String cell2) {
 		int x1 = cell1.charAt(0) - 'A';
 		int y1 = cell1.charAt(1) - '0';

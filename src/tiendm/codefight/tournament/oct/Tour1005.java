@@ -52,21 +52,6 @@ public class Tour1005 {
 		return s.size();
 	}
 
-	int sumBelowBound(int bound) {
-
-		int left = 0, right = bound + 1;
-		while (right - left > 1) {
-			int middle = (left + right) / 2;
-			if (middle * (middle + 1) / 2 <= bound) {
-				left = middle;
-			} else {
-				right = middle;
-			}
-		}
-
-		return left;
-	}
-
 	public static void main(String[] args) {
 		Tour1005 t = new Tour1005();
 		int[] fromV = { 2, 1, 3, 4, 4, 4, 1 };
