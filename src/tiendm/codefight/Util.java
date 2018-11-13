@@ -90,11 +90,11 @@ public class Util {
 		return result;
 	}
 
-	int digitSum(int x) {
+	int digitSum(int n) {
 		int s = 0;
-		while (x > 0) {
-			s += x % 10;
-			x /= 10;
+		while (n > 0) {
+			s += n % 10;
+			n /= 10;
 		}
 		return s;
 	}
