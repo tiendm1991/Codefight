@@ -59,16 +59,6 @@ public class Tour1021 {
 		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 	}
 	
-	String htmlEndTagByStartTag(String startTag) {
-		String result = "</";
-		int position = 1;
-		while (startTag.charAt(position) != ' ') {
-			result += startTag.charAt(position++);
-		}
-		result += '>';
-		return result;
-	}
-
 	int swapNeighbouringDigits(int n) {
 		String s = n + "";
 		char[] c = s.toCharArray();
