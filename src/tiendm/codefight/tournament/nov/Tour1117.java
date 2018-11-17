@@ -53,7 +53,7 @@ public class Tour1117 {
 
 	public static void main(String[] args) {
 		Tour1117 t = new Tour1117();
-		int[] values = { 1, 6, 7 };
+		int[] values = { 2, 1, 3, 5, 3, 2 };
 		String[] s = { "*", "-", "5", "6", "7" };
 		System.out.println(t);
 	}
