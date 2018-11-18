@@ -1,6 +1,6 @@
-package tiendm.codefight.interview;
+package tiendm.codefight.interview.nov;
 
-public class Interview1711 {
+public class Interview1117 {
 	char firstNotRepeatingCharacter(String s) {
 		int[] occ = new int[26];
 		char r = '_';
