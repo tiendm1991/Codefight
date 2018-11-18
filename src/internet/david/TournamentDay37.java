@@ -70,7 +70,7 @@ public class TournamentDay37 {
         }
         return false;
     }
-
+    
     private static int[] zFunctionNaive(String s) {
         int[] Z = new int[s.length()];
         int n = s.length();

@@ -60,7 +60,7 @@ public class TournamentDay29 {
     private static int arraySumAdjacentDifference(int[] inputArray) {
 
         int answer = 0;
-        for (int i = 1; i < inputArray.length - 1; i++) {
+        for (int i = 1; i < inputArray.length; i++) {
             answer += Math.abs(inputArray[i] - inputArray[i - 1]);
         }
         return answer;
