@@ -1,4 +1,4 @@
-package tiendm.codefight.interview.nov;
+package tiendm.codefight.interview;
 
 public class InterviewArays {
 	char firstNotRepeatingCharacter(String s) {
