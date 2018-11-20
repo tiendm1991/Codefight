@@ -28,10 +28,6 @@ public class Tour2908 {
 	    return ls;
 	}
 
-	int countLineColorings(int points, int colors) {
-	    return colors * (int)Math.pow(colors-1, points-1);
-	}
-
 	public static void main(String[] args) {
 		Tour2908 t = new Tour2908();
 		int[][] x = { { 0, 1, 2, 3 }, { 1, 2, 3, 0 }, { 1, 1, 1 } };
