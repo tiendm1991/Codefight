@@ -113,12 +113,29 @@ public class InterviewHash {
 		}
 	}
 
+	int possibleSums2(int[] coins, int[] quantity) {
+		Set<Integer> set = new HashSet<>();
+		set.add(0);
+		for (int i = 0; i < coins.length; i++) {
+			int coint = coins[i];
+			Set<Integer> setNew = new HashSet<>();
+			for (Iterator<Integer> it = set.iterator(); it.hasNext();) {
+				int x = it.next();
+				for (int j = 0; j < quantity[i]; j++) {
+					setNew.add(x + coint * (j + 1));
+				}
+			}
+			set.addAll(setNew);
+		}
+		return set.size() - 1;
+	}
+
 	public static void main(String[] args) {
 		InterviewHash i = new InterviewHash();
 		String[] str = { "cat", "dog", "doggy" };
 		String[] pat = { "a", "b", "b" };
-		int[] x = { 1, 1, 1, 1, 1 };
-		int[] y = { 9, 19, 18, 12, 19 };
-		System.out.println(i.possibleSums(x, y));
+		int[] x = { 10, 50, 100 };
+		int[] y = { 1, 2, 1 };
+		System.out.println(i.possibleSums2(x, y));
 	}
 }
