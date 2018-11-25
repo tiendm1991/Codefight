@@ -3,8 +3,11 @@ package tiendm.codefight.interview;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class InterviewHash {
@@ -86,11 +89,36 @@ public class InterviewHash {
 		return false;
 	}
 
+	int possibleSums(int[] coins, int[] quantity) {
+		List<Integer> lsCoins = new ArrayList<>();
+		for (int i = 0; i < coins.length; i++) {
+			for (int j = 0; j < quantity[i]; j++) {
+				lsCoins.add(coins[i]);
+			}
+		}
+		Set<Integer> set = new HashSet<>();
+		set.add(0);
+		calculateSum(lsCoins, set);
+		return set.size() - 1;
+	}
+
+	private void calculateSum(List<Integer> lsCoins, Set<Integer> set) {
+		for (int element : lsCoins) {
+			Set<Integer> setNew = new HashSet<>();
+			for (Iterator<Integer> it = set.iterator(); it.hasNext();) {
+				int x = it.next();
+				setNew.add(x + element);
+			}
+			set.addAll(setNew);
+		}
+	}
+
 	public static void main(String[] args) {
 		InterviewHash i = new InterviewHash();
 		String[] str = { "cat", "dog", "doggy" };
 		String[] pat = { "a", "b", "b" };
-		int[] x = { 1, 0, 1, 1 };
-		System.out.println(i.containsCloseNums(x, 1));
+		int[] x = { 1, 1, 1, 1, 1 };
+		int[] y = { 9, 19, 18, 12, 19 };
+		System.out.println(i.possibleSums(x, y));
 	}
 }
