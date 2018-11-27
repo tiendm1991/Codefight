@@ -2,6 +2,7 @@ package tiendm.codefight.interview;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -146,7 +147,7 @@ public class InterviewHash {
       count = (count + 1) % L;
     }
     List<String> ls = _map.keySet().stream().map(s -> s).collect(Collectors.toList());
-    return ls.get(ls.size()-1);
+    return ls.get(ls.size() - 1);
   }
 
   String swap(String str, int i, int j) {
@@ -157,14 +158,82 @@ public class InterviewHash {
     return new String(c);
   }
 
+  String swapLexOrder2(String str, int[][] pairs) {
+    if (pairs.length == 0)
+      return str;
+    char[] c = str.toCharArray();
+    int[] parent = new int[c.length];
+    for (int i = 0; i < parent.length; i++) {
+      parent[i] = -1;
+    }
+    for (int[] pair : pairs) {
+      int x = pair[0] - 1;
+      int y = pair[1] - 1;
+      if (parent[x] == -1) {
+        parent[x] = x;
+      }
+      while (parent[x] != x) {
+        x = parent[x];
+      }
+      int tmp = y;
+      while (parent[y] != y && parent[y] != -1) {
+        int p = parent[y];
+        parent[p] = x;
+        y = p;
+      }
+      parent[tmp] = x;
+    }
+    HashMap<Integer, ArrayList<Integer>> _map = new HashMap<>();
+    for (int i = 0; i < parent.length; i++) {
+      if (parent[i] == -1) {
+        continue;
+      }
+      ArrayList<Integer> component = _map.get(parent[i]);
+      if (component != null) {
+        component.add(i);
+      } else {
+        component = new ArrayList<>();
+        component.add(i);
+        _map.put(parent[i], component);
+      }
+    }
+
+    for (Integer k : _map.keySet()) {
+      ArrayList<Integer> component = _map.get(k);
+      List<Character> lschar = new ArrayList<>();
+      for (int i : component) {
+        lschar.add(c[i]);
+      }
+      Collections.sort(lschar, new Comparator<Character>() {
+        @Override
+        public int compare(Character o1, Character o2) {
+          return o2.compareTo(o1);
+        }
+      });
+      for (int i = 0; i < component.size(); i++) {
+        c[component.get(i)] = lschar.get(i);
+      }
+    }
+    return new String(c);
+  }
+
+
 
   public static void main(String[] args) {
     InterviewHash i = new InterviewHash();
-    String[] str = {"cat", "dog", "doggy"};
-    String[] pat = {"a", "b", "b"};
-    int[] x = {10, 50, 100};
-    int[] y = {1, 2, 1};
-    int[][] pairs = {{1, 3}, {6, 8}, {3, 8}, {2, 7}};
-    System.out.println(i.swapLexOrder("acxrabdz", pairs));
+    int[][] pairs = 
+        {{8,5}, 
+        {10,8}, 
+        {4,18}, 
+        {20,12}, 
+        {5,2}, 
+        {17,2}, 
+        {13,25}, 
+        {29,12}, 
+        {22,2}, 
+        {17,11}};
+    // 5,7 0,2 2,7 1,6
+    System.out.println(i.swapLexOrder2("fixmfbhyutghwbyezkveyameoamqoi", pairs));
+    System.out.println("fixmfbhyutghwbyezkveyameoamqoi".length());
   }
 }
