@@ -167,21 +167,27 @@ public class InterviewHash {
       parent[i] = -1;
     }
     for (int[] pair : pairs) {
-      int x = pair[0] - 1;
-      int y = pair[1] - 1;
+      int x = Math.min(pair[0] - 1, pair[1] - 1);
+      int y = Math.max(pair[0] - 1, pair[1] - 1);
       if (parent[x] == -1) {
         parent[x] = x;
+      } else {
+        int tmp = x;
+        while (parent[x] != x) {
+          x = parent[x];
+        }
+        parent[tmp] = x;
       }
-      while (parent[x] != x) {
-        x = parent[x];
+      if (parent[y] == -1) {
+        parent[y] = x;
+      } else {
+        int replace = parent[y];
+        for (int i = 0; i < parent.length; i++) {
+          if (parent[i] == replace) {
+            parent[i] = x;
+          }
+        }
       }
-      int tmp = y;
-      while (parent[y] != y && parent[y] != -1) {
-        int p = parent[y];
-        parent[p] = x;
-        y = p;
-      }
-      parent[tmp] = x;
     }
     HashMap<Integer, ArrayList<Integer>> _map = new HashMap<>();
     for (int i = 0; i < parent.length; i++) {
@@ -217,23 +223,24 @@ public class InterviewHash {
     return new String(c);
   }
 
-
-
   public static void main(String[] args) {
     InterviewHash i = new InterviewHash();
-    int[][] pairs = 
-        {{8,5}, 
-        {10,8}, 
-        {4,18}, 
-        {20,12}, 
-        {5,2}, 
-        {17,2}, 
-        {13,25}, 
-        {29,12}, 
-        {22,2}, 
-        {17,11}};
+    int[][] pairs = {{1, 3}, // 0, 2
+        {6, 8}, // 5, 7
+        {3, 8}, // 2, 7
+        {2, 7}}; // 1, 6
+    // int[][] pairs = {{8, 5}, // 7 , 4
+    // {10, 8}, // 9 , 7
+    // {4, 18}, // 3 , 17
+    // {20, 12}, // 19, 11
+    // {2, 5}, // 4 , 1
+    // {17, 2}, // 16, 1
+    // {13, 25}, // 12, 24
+    // {29, 12}, // 28, 11
+    // {22, 2}, // 21, 1
+    // {17, 11}};// 16, 10
     // 5,7 0,2 2,7 1,6
-    System.out.println(i.swapLexOrder2("fixmfbhyutghwbyezkveyameoamqoi", pairs));
-    System.out.println("fixmfbhyutghwbyezkveyameoamqoi".length());
+    System.out.println(i.swapLexOrder2("acxrabdz", pairs));
+    System.out.println("acxrabdz".length());
   }
 }
