@@ -95,7 +95,6 @@ public class Tour1101 {
     return result;
   }
 
-
   public static void main(String[] args) {
     Tour1101 t = new Tour1101();
     int[] values = {1, 3, 2, 1};

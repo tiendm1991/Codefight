@@ -18,13 +18,13 @@ public class TakingAttendance {
     s = s.toLowerCase();
     s += "a";
     int count = isConsonant(s.charAt(0)) ? 1 : 0;
-    for(int i = 1; i < s.length(); i++) {
+    for (int i = 1; i < s.length(); i++) {
       char c = s.charAt(i);
-      if(isConsonant(c)) {
+      if (isConsonant(c)) {
         count++;
-      }else {
-        if(count > 0) {
-          sum += Math.pow(2, count-1);
+      } else {
+        if (count > 0) {
+          sum += Math.pow(2, count - 1);
         }
         count = 0;
       }

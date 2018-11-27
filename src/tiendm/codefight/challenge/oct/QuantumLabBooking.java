@@ -17,20 +17,20 @@ public class QuantumLabBooking {
     lsBooking.add(firstInLine);
     while (!q.isEmpty() && lsBooking.size() <= k) {
       int cur = q.poll();
-      for(int i = 0; i < friends.length; i++) {
-        if(friends[cur][i] == 1) {
+      for (int i = 0; i < friends.length; i++) {
+        if (friends[cur][i] == 1) {
           q.add(i);
           lsBooking.add(i);
         }
       }
     }
-    if(lsBooking.size() <= k) return -1;
+    if (lsBooking.size() <= k)
+      return -1;
     return lsBooking.get(k);
   }
+
   public static void main(String[] args) {
-    int[][] friends = { {1,1,1}, 
-                        {1,0,0}, 
-                        {0,1,1}};
+    int[][] friends = {{1, 1, 1}, {1, 0, 0}, {0, 1, 1}};
     QuantumLabBooking q = new QuantumLabBooking();
     System.out.println(q.quantumLabBooking(friends, 1, 10));
   }
