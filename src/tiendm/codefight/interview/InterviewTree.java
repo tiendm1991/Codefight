@@ -38,14 +38,35 @@ public class InterviewTree {
     Queue<Tree<Integer>> q = new LinkedList<>();
     q.add(t);
     lsTree.add(t);
-    while(!q.isEmpty()){
+    boolean notLeaf = true;
+    while (notLeaf) {
       Tree<Integer> cur = q.poll();
-      if(cur != null){
+      notLeaf = false;
+      if (cur != null) {
+        if (cur.left != null || cur.right != null) {
+          notLeaf = true;
+        }
         lsTree.add(cur.left);
         lsTree.add(cur.right);
         q.add(cur.left);
         q.add(cur.right);
       }
+    }
+    for (int i = 1; i * 2 < lsTree.size(); i = i * 2 + 1) {
+      int l = i;
+      int r = i * 2;
+      while (l < r) {
+        Tree<Integer> treeL = lsTree.get(l);
+        Tree<Integer> treeR = lsTree.get(r);
+        l++;
+        r--;
+        if (treeL == null && treeR == null)
+          continue;
+        if ((treeL == null && treeR != null) || (treeL != null && treeR == null)
+            || treeL.value != treeR.value)
+          return false;
+      }
+
     }
     return true;
   }
