@@ -351,10 +351,10 @@ public class TournamentDay43 {
     return result;
   }
 
-  private static int equationSolutions(int L, int R) {
+  private static int equationSolutions(int l, int r) {
     int ans = 0;
-    for (int i = L; i <= R; i++)
-      for (int j = L; j <= R; j++)
+    for (int i = l; i <= r; i++)
+      for (int j = l; j <= r; j++)
         if (i * i * i == j * j)
           ans++;
     return ans;

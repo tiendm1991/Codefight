@@ -1,7 +1,5 @@
 package internet.david;
 
-import java.util.ArrayList;
-
 /**
  * Created by Davit on 07/07/16.
  */
@@ -77,25 +75,25 @@ public class TournamentDay32 {
    * return new int[]{0}; }
    */
 
-  private static int[] fractionDivision(int[] A, int[] B) {
+  private static int[] fractionDivision(int[] a, int[] b) {
 
-    class Helper {
-      int gcdEuclid(int a, int b) {
+    class helper {
+      int gcdeuclid(int a, int b) {
         if (a == 0) {
           return b;
         }
-        return gcdEuclid(b % a, a);
+        return gcdeuclid(b % a, a);
       }
     }
-    Helper h = new Helper();
+    helper h = new helper();
 
-    int[] C = {A[0] * B[1], A[1] * B[0]};
-    int gcd = h.gcdEuclid(C[0], C[1]);
+    int[] c = {a[0] * b[1], a[1] * b[0]};
+    int gcd = h.gcdeuclid(c[0], c[1]);
 
-    C[0] /= gcd;
-    C[1] /= gcd;
+    c[0] /= gcd;
+    c[1] /= gcd;
 
-    return C;
+    return c;
   }
 
   private static boolean logicalNor(boolean a, boolean b) {
