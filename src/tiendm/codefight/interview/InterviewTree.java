@@ -1,9 +1,7 @@
 package tiendm.codefight.interview;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class InterviewTree {
 
@@ -15,11 +13,12 @@ public class InterviewTree {
     T value;
     Tree<T> left;
     Tree<T> right;
+
     @Override
     public String toString() {
       return value + "";
     }
-    
+
   }
 
   boolean hasPathWithGivenSum(Tree<Integer> t, int s) {
@@ -39,36 +38,37 @@ public class InterviewTree {
     if (t == null) {
       return true;
     }
-    List<Tree<Integer>> lsTree = new ArrayList<>();
-    Queue<Tree<Integer>> q = new LinkedList<>();
-    q.add(t);
-    lsTree.add(t);
-    while (!q.isEmpty()) {
-      Tree<Integer> cur = q.poll();
-      if (cur != null) {
-        lsTree.add(cur.left);
-        lsTree.add(cur.right);
-        q.add(cur.left);
-        q.add(cur.right);
+    List<Tree<Integer>> lsPrev = new ArrayList<>();
+    lsPrev.add(t);
+    while (true) {
+      List<Tree<Integer>> lsCheck = new ArrayList<>();
+      int countNull = 0;
+      for(Tree<Integer> node : lsPrev){
+        if(node != null){
+          if(node.left == null) countNull++;
+          if(node.right == null) countNull++;
+          lsCheck.add(node.left);
+          lsCheck.add(node.right);
+        }
       }
-    }
-    for (int i = 1; i * 2 < lsTree.size(); i = i * 2 + 1) {
-      int l = i;
-      int r = i * 2;
-      while (l < r) {
-        Tree<Integer> treeL = lsTree.get(l);
-        Tree<Integer> treeR = lsTree.get(r);
-        l++;
-        r--;
-        if (treeL == null && treeR == null)
+      if(lsCheck.size() == 0 || lsCheck.size() == countNull){
+        return true;
+      }
+      if(lsCheck.size() % 2 != 0) return false;
+      int i = lsCheck.size() / 2 - 1;
+      int j = lsCheck.size() / 2;
+      while(i >= 0){
+        Tree<Integer> l = lsCheck.get(i--);
+        Tree<Integer> r = lsCheck.get(j++);
+        if(l == null && r == null) {
           continue;
-        if ((treeL == null && treeR != null) || (treeL != null && treeR == null)
-            || !treeL.value.equals(treeR.value))
+        }
+        if((l == null && r != null) || (l != null && r == null) || !l.value.equals(r.value)){
           return false;
+        }
       }
-
+      lsPrev = lsCheck;
     }
-    return true;
   }
 
   public static void main(String[] args) {
