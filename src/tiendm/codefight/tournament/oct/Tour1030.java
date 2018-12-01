@@ -5,21 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tour1030 {
-  boolean increaseNumberRoundness(int n) {
-
-    boolean gotToSignificant = false;
-    while (n > 0) {
-      if (n % 10 == 0 && gotToSignificant) {
-        return true;
-      } else if (n % 10 != 0) {
-        gotToSignificant = true;
-      }
-      n /= 10;
-    }
-
-    return false;
-  }
-
   int trailingZeros(int n) {
     int answer = 0;
     while (n % 2 == 0) {
