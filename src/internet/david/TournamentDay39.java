@@ -36,19 +36,19 @@ public class TournamentDay39 {
     return pay[n];
   }
 
-  private static ArrayList<Integer> arrayCenter(ArrayList<Integer> A) {
+  private static ArrayList<Integer> arrayCenter(ArrayList<Integer> a) {
 
-    int n = A.size();
-    int sumA = A.get(0), minA = A.get(0);
+    int n = a.size();
+    int sumA = a.get(0), minA = a.get(0);
     for (int i = 1; i < n; i++) {
-      sumA += A.get(i);
-      minA = Math.min(minA, A.get(i));
+      sumA += a.get(i);
+      minA = Math.min(minA, a.get(i));
     }
 
     ArrayList<Integer> B = new ArrayList<>();
     for (int i = 0; i < n; i++) {
-      if (Math.abs(n * A.get(i) - sumA) < n * minA) {
-        B.add(A.get(i));
+      if (Math.abs(n * a.get(i) - sumA) < n * minA) {
+        B.add(a.get(i));
       }
     }
 

@@ -85,8 +85,37 @@ public class InterviewTree {
     }
   }
 
+  int kthSmallestInBST(Tree<Integer> t, int k) {
+    List<Tree<Integer>> inTreeList = new ArrayList<>();
+    inTraversal(t, inTreeList);
+    return inTreeList.get(k-1).value.intValue();
+  }
+
+  void inTraversal(Tree<Integer> cur, List<Tree<Integer>> inTreeList) {
+    if (cur.left == null && cur.right == null) {
+      inTreeList.add(cur);
+      return;
+    }
+    if (cur.left != null) {
+      inTraversal(cur.left, inTreeList);
+    }
+    inTreeList.add(cur);
+    if (cur.right != null) {
+      inTraversal(cur.right, inTreeList);
+    }
+  }
+
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    System.out.println(i.findProfession(3, 3));
+    Tree<Integer> t0 = new Tree<Integer>(3);
+    Tree<Integer> t1 = new Tree<Integer>(1);
+    Tree<Integer> t2 = new Tree<Integer>(4);
+    Tree<Integer> t3 = new Tree<Integer>(5);
+    Tree<Integer> t4 = new Tree<Integer>(6);
+    t0.left = t1;
+    t0.right = t3;
+    t3.left = t2;
+    t3.right = t4;
+    System.out.println(i.kthSmallestInBST(t0,4));
   }
 }
