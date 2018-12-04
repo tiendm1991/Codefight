@@ -16,7 +16,7 @@ public class ListBackwood {
       return matrix;
     int len = matrix.length;
     for (int i = 0; i < len / 2; i++) {
-      swap(matrix, i, i, len - i, len - i);
+      swap(matrix, i, i, len - 1 - i, len - 1 - i);
       swap(matrix, i, len - 1 - i, len - 1 - i, i);
     }
     return matrix;
@@ -110,8 +110,11 @@ public class ListBackwood {
 
   public static void main(String[] args) {
     ListBackwood test = new ListBackwood();
-    int[][] x = {{1, 0, 0, 2, 0, 0, 3}, {0, 1, 0, 2, 0, 3, 0}, {0, 0, 1, 2, 3, 0, 0},
-        {8, 8, 8, 9, 4, 4, 4}, {0, 0, 7, 6, 5, 0, 0}, {0, 7, 0, 6, 0, 5, 0}, {7, 0, 0, 6, 0, 0, 5}};
-    System.out.println(test.starRotation(x, 3, new int[] {3, 3}, 15));
+    int[][] x = 
+        {{1,2,3,4}, 
+        { 5,6,7,8}, 
+        { 9,10,11,12},
+        {13,14,15,16}};
+    System.out.println(test.reverseOnDiagonals(x));
   }
 }
