@@ -85,10 +85,50 @@ public class InterviewTree {
     }
   }
 
+  // -------kthSmallestInBST
   int kthSmallestInBST(Tree<Integer> t, int k) {
     List<Tree<Integer>> inTreeList = new ArrayList<>();
     inTraversal(t, inTreeList);
-    return inTreeList.get(k-1).value.intValue();
+    return inTreeList.get(k - 1).value.intValue();
+  }
+
+  // -------kthSmallestInBST
+  boolean isSubtree(Tree<Integer> t1, Tree<Integer> t2) {
+    if (t2 == null)
+      return true;
+    if (t1 == null)
+      return false;
+    if (isSubtreeWithRoot(t1, t2))
+      return true;
+    if (t1.left != null && isSubtree(t1.left, t2)) {
+      return true;
+    }
+    if (t1.right != null && isSubtree(t1.right, t2)) {
+      return true;
+    }
+    return false;
+  }
+
+  boolean isSubtreeWithRoot(Tree<Integer> t1, Tree<Integer> t2) {
+    if (!t1.value.equals(t2.value)) {
+      return false;
+    }
+    boolean result = true;
+    if (t2.left == null && t1.left != null)
+      return false;
+    if (t2.right == null && t1.right != null)
+      return false;
+    if (t2.left != null) {
+      if (t1.left == null)
+        return false;
+      result = result && isSubtreeWithRoot(t1.left, t2.left);
+    }
+    if (t2.right != null) {
+      if (t1.right == null)
+        return false;
+      result = result && isSubtreeWithRoot(t1.right, t2.right);
+    }
+    return result;
   }
 
   void inTraversal(Tree<Integer> cur, List<Tree<Integer>> inTreeList) {
@@ -107,15 +147,32 @@ public class InterviewTree {
 
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    Tree<Integer> t0 = new Tree<Integer>(3);
-    Tree<Integer> t1 = new Tree<Integer>(1);
-    Tree<Integer> t2 = new Tree<Integer>(4);
-    Tree<Integer> t3 = new Tree<Integer>(5);
+    Tree<Integer> t0 = new Tree<Integer>(5);
+    Tree<Integer> t1 = new Tree<Integer>(10);
+    Tree<Integer> t2 = new Tree<Integer>(7);
+    Tree<Integer> t3 = new Tree<Integer>(4);
     Tree<Integer> t4 = new Tree<Integer>(6);
+    Tree<Integer> t5 = new Tree<Integer>(1);
+    Tree<Integer> t6 = new Tree<Integer>(2);
+    Tree<Integer> t7 = new Tree<Integer>(-1);
     t0.left = t1;
-    t0.right = t3;
-    t3.left = t2;
-    t3.right = t4;
-    System.out.println(i.kthSmallestInBST(t0,4));
+    t0.right = t2;
+    t1.left = t3;
+    t1.right = t4;
+    t3.left = t5;
+    t3.right = t6;
+    t4.right = t7;
+    Tree<Integer> x0 = new Tree<Integer>(10);
+    Tree<Integer> x1 = new Tree<Integer>(4);
+    Tree<Integer> x2 = new Tree<Integer>(6);
+    Tree<Integer> x3 = new Tree<Integer>(1);
+    Tree<Integer> x4 = new Tree<Integer>(2);
+    Tree<Integer> x5 = new Tree<Integer>(-1);
+    x0.left = x1;
+    x0.right = x2;
+    x1.left = x3;
+    x1.right = x4;
+    x2.right = x5;
+    System.out.println(i.isSubtree(t0, x0));
   }
 }
