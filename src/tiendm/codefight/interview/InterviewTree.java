@@ -92,6 +92,20 @@ public class InterviewTree {
     return inTreeList.get(k - 1).value.intValue();
   }
 
+  void inTraversal(Tree<Integer> cur, List<Tree<Integer>> inTreeList) {
+    if (cur.left == null && cur.right == null) {
+      inTreeList.add(cur);
+      return;
+    }
+    if (cur.left != null) {
+      inTraversal(cur.left, inTreeList);
+    }
+    inTreeList.add(cur);
+    if (cur.right != null) {
+      inTraversal(cur.right, inTreeList);
+    }
+  }
+
   // -------kthSmallestInBST
   boolean isSubtree(Tree<Integer> t1, Tree<Integer> t2) {
     if (t2 == null)
@@ -131,48 +145,15 @@ public class InterviewTree {
     return result;
   }
 
-  void inTraversal(Tree<Integer> cur, List<Tree<Integer>> inTreeList) {
-    if (cur.left == null && cur.right == null) {
-      inTreeList.add(cur);
-      return;
-    }
-    if (cur.left != null) {
-      inTraversal(cur.left, inTreeList);
-    }
-    inTreeList.add(cur);
-    if (cur.right != null) {
-      inTraversal(cur.right, inTreeList);
-    }
+  Tree<Integer> restoreBinaryTree(int[] inorder, int[] preorder) {
+    Tree<Integer> root = new Tree<Integer>(preorder[0]);
+    return root;
   }
 
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    Tree<Integer> t0 = new Tree<Integer>(5);
-    Tree<Integer> t1 = new Tree<Integer>(10);
-    Tree<Integer> t2 = new Tree<Integer>(7);
-    Tree<Integer> t3 = new Tree<Integer>(4);
-    Tree<Integer> t4 = new Tree<Integer>(6);
-    Tree<Integer> t5 = new Tree<Integer>(1);
-    Tree<Integer> t6 = new Tree<Integer>(2);
-    Tree<Integer> t7 = new Tree<Integer>(-1);
-    t0.left = t1;
-    t0.right = t2;
-    t1.left = t3;
-    t1.right = t4;
-    t3.left = t5;
-    t3.right = t6;
-    t4.right = t7;
-    Tree<Integer> x0 = new Tree<Integer>(10);
-    Tree<Integer> x1 = new Tree<Integer>(4);
-    Tree<Integer> x2 = new Tree<Integer>(6);
-    Tree<Integer> x3 = new Tree<Integer>(1);
-    Tree<Integer> x4 = new Tree<Integer>(2);
-    Tree<Integer> x5 = new Tree<Integer>(-1);
-    x0.left = x1;
-    x0.right = x2;
-    x1.left = x3;
-    x1.right = x4;
-    x2.right = x5;
-    System.out.println(i.isSubtree(t0, x0));
+    int[] in = {4, 2, 1, 5, 3, 6};
+    int[] pre = {1, 2, 4, 3, 5, 6};
+    System.out.println(i.restoreBinaryTree(in, pre));
   }
 }
