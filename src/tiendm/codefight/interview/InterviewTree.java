@@ -147,7 +147,39 @@ public class InterviewTree {
 
   Tree<Integer> restoreBinaryTree(int[] inorder, int[] preorder) {
     Tree<Integer> root = new Tree<Integer>(preorder[0]);
+    for (int i = 1; i < preorder.length; i++) {
+      int v = preorder[i];
+      int idxNew = indexOf(inorder, v);
+      Tree<Integer> cur = root;
+      while (true) {
+        int idxCur = indexOf(inorder, cur.value);
+        if (idxNew < idxCur) {
+          if (cur.left == null) {
+            cur.left = new Tree<Integer>(v);
+            break;
+          } else {
+            cur = cur.left;
+          }
+        } else {
+          if (cur.right == null) {
+            cur.right = new Tree<Integer>(v);
+            break;
+          } else {
+            cur = cur.right;
+          }
+        }
+      }
+    }
     return root;
+  }
+
+  int indexOf(int[] values, int check) {
+    for (int i = 0; i < values.length; i++) {
+      if (values[i] == check) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   public static void main(String[] args) {
