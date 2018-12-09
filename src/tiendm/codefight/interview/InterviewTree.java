@@ -1,7 +1,11 @@
 package tiendm.codefight.interview;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InterviewTree {
 
@@ -106,7 +110,7 @@ public class InterviewTree {
     }
   }
 
-  // -------kthSmallestInBST
+  // -------isSubtree
   boolean isSubtree(Tree<Integer> t1, Tree<Integer> t2) {
     if (t2 == null)
       return true;
@@ -145,6 +149,7 @@ public class InterviewTree {
     return result;
   }
 
+  // -------restoreBinaryTree
   Tree<Integer> restoreBinaryTree(int[] inorder, int[] preorder) {
     Tree<Integer> root = new Tree<Integer>(preorder[0]);
     for (int i = 1; i < preorder.length; i++) {
@@ -182,10 +187,132 @@ public class InterviewTree {
     return -1;
   }
 
+  // -------restoreBinaryTree
+  List<String> findSubstrings_Brute(String[] words, String[] parts) {
+    List<String> result = new ArrayList<>();
+    Arrays.sort(parts, new Comparator<String>() {
+      @Override
+      public int compare(String o1, String o2) {
+        if (o1.length() != o2.length()) {
+          return o2.length() - o1.length();
+        }
+        return o1.compareTo(o2);
+      }
+    });
+    for (String w : words) {
+      String subStr = "";
+      int idx = -1;
+      for (int i = 0; i < parts.length; i++) {
+        if (parts[i].length() < subStr.length())
+          break;
+        int idx1 = w.indexOf(parts[i]);
+        if (idx1 >= 0) {
+          if (idx == -1 || (parts[i].length() == subStr.length() && idx1 < idx)) {
+            subStr = parts[i];
+            idx = idx1;
+          }
+        }
+      }
+      if ("".equals(subStr)) {
+        result.add(w);
+        continue;
+      }
+      result.add(w.replaceFirst(subStr, "[" + subStr + "]"));
+    }
+    return result;
+  }
+
+  // -------restoreBinaryTree2
+  List<String> findSubstrings(String[] words, String[] parts) {
+    List<String> result = new ArrayList<>();
+    Trie trie = new Trie();
+    for (String s : parts) {
+      trie.insert(s);
+    }
+    for (String w : words) {
+      String subStr = findSub(w, trie);
+      if ("".equals(subStr)) {
+        result.add(w);
+      } else {
+        result.add(w.replaceFirst(subStr, "[" + subStr + "]"));
+      }
+    }
+    return result;
+  }
+
+  String findSub(String w, Trie trie) {
+    String result = "";
+    for (int i = w.length() - 1; i >= 0; i--) {
+      String s = w.substring(i);
+      String searchMax = trie.searchMatchMax(s);
+      if (searchMax.length() >= result.length()) {
+        result = searchMax;
+      }
+    }
+    return result;
+  }
+
+  class Trie {
+    class TrieNode {
+      Map<Character, TrieNode> children;
+      boolean endOfWord;
+
+      public TrieNode() {
+        children = new HashMap<>();
+        endOfWord = false;
+      }
+    }
+
+    private final TrieNode root;
+
+    public Trie() {
+      root = new TrieNode();
+    }
+
+    /**
+     * Iterative implementation of insert into trie
+     */
+    public void insert(String word) {
+      TrieNode current = root;
+      for (int i = 0; i < word.length(); i++) {
+        char ch = word.charAt(i);
+        TrieNode node = current.children.get(ch);
+        if (node == null) {
+          node = new TrieNode();
+          current.children.put(ch, node);
+        }
+        current = node;
+      }
+      // mark the current nodes endOfWord as true
+      current.endOfWord = true;
+    }
+
+    public String searchMatchMax(String word) {
+      TrieNode current = root;
+      String max = "";
+      String check = "";
+      int i = 0;
+      while (i < word.length()) {
+        char ch = word.charAt(i);
+        TrieNode node = current.children.get(ch);
+        if (node == null) {
+          return max;
+        }
+        check += ch;
+        if (node.endOfWord) {
+          max = check;
+        }
+        current = node;
+        i++;
+      }
+      return max;
+    }
+  }
+
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    int[] in = {4, 2, 1, 5, 3, 6};
-    int[] pre = {1, 2, 4, 3, 5, 6};
-    System.out.println(i.restoreBinaryTree(in, pre));
+    String[] w = {"Apple", "Melon", "Orange", "Watermelon"};
+    String[] p = {"a", "mel", "lon", "el", "An"};
+    System.out.println(i.findSubstrings(w, p));
   }
 }
