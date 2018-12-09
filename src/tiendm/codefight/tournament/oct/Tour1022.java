@@ -163,24 +163,6 @@ public class Tour1022 {
     return intersection[0] * intersection[1];
   }
 
-  int greatestCommonPrimeDivisor(int a, int b) {
-
-    int gcd = -1;
-    for (int divisor = 2; a > 1 && b > 1; divisor++) {
-      if (a % divisor == 0 && b % divisor == 0) {
-        gcd = divisor;
-      }
-      while (a % divisor == 0) {
-        a /= divisor;
-      }
-      while (b % divisor == 0) {
-        b /= divisor;
-      }
-    }
-
-    return gcd;
-  }
-
   int[] fractionSubtraction(int[] a, int[] b) {
     int[] result = new int[2];
     result[0] = a[0] * b[1] - a[1] * b[0];

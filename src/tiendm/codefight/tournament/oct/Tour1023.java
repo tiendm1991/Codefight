@@ -122,16 +122,6 @@ public class Tour1023 {
     return count;
   }
 
-  int pagesNumberingWithInk(int current, int numberOfDigits) {
-    int digitsInCurrent = countDigitsInNumber(current);
-    while (numberOfDigits >= digitsInCurrent) {
-      numberOfDigits -= digitsInCurrent;
-      current++;
-      digitsInCurrent = countDigitsInNumber(current);
-    }
-    return current - 1;
-  }
-
   boolean higherVersion(String ver1, String ver2) {
     String[] v1 = ver1.split("\\.");
     String[] v2 = ver2.split("\\.");

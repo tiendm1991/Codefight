@@ -383,16 +383,6 @@ public class Tour1026 {
     return count;
   }
 
-  int pagesNumberingWithInk(int current, int numberOfDigits) {
-    int digitsInCurrent = countDigitsInNumber(current);
-    while (numberOfDigits >= digitsInCurrent) {
-      numberOfDigits -= digitsInCurrent;
-      current++;
-      digitsInCurrent = countDigitsInNumber(current);
-    }
-    return current - 1;
-  }
-
   String caesarBoxCipherEncoding(String inputString) {
     int n = (int) Math.sqrt(inputString.length());
     String ans = "";
