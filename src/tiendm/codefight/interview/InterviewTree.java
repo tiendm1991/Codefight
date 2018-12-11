@@ -309,10 +309,76 @@ public class InterviewTree {
     }
   }
 
+  // ---------------deleteFromBST
+  Tree<Integer> deleteFromBST(Tree<Integer> t, int[] queries) {
+    if (t == null || queries == null || queries.length == 0)
+      return t;
+    Tree<Integer> t0 = new Tree<Integer>(null);
+    t0.left = t;
+    for (int x : queries) {
+      t0 = deleteBST(t0, x);
+    }
+    return t0.left;
+  }
+
+  Tree<Integer> deleteBST(Tree<Integer> t, int x) {
+    Tree<Integer> remove = t.left;
+    Map<Tree<Integer>, Tree<Integer>> parent = new HashMap<>();
+    parent.put(remove, t);
+    while (remove != null) {
+      if (remove.value == x) {
+        break;
+      } else if (remove.value < x) {
+        parent.put(remove.right, remove);
+        remove = remove.right;
+      } else if (remove.value > x) {
+        parent.put(remove.left, remove);
+        remove = remove.left;
+      }
+    }
+    if (remove == null) {
+      return t;
+    }
+    Tree<Integer> parOfRm = parent.get(remove);
+    if (remove.left != null) {
+      Tree<Integer> replace = remove.left;
+      parent.put(replace, remove);
+      if (replace.right == null) {
+        remove.left = replace.left;
+        remove.value = replace.value;
+      } else {
+        while (replace.right != null) {
+          parent.put(replace.right, replace);
+          replace = replace.right;
+        }
+        parent.get(replace).right = null;
+        remove.value = replace.value;
+      }
+    } else {
+      if (parOfRm.left != null && parOfRm.left.value == x) {
+        parOfRm.left = remove.right;
+      } else {
+        parOfRm.right = remove.right;
+      }
+    }
+    return t;
+  }
+
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    String[] w = {"Apple", "Melon", "Orange", "Watermelon"};
-    String[] p = {"a", "mel", "lon", "el", "An"};
-    System.out.println(i.findSubstrings(w, p));
+    Tree<Integer> t0 = new Tree<Integer>(3);
+    Tree<Integer> t1 = new Tree<Integer>(2);
+    Tree<Integer> t2 = new Tree<Integer>(5);
+    Tree<Integer> t3 = new Tree<Integer>(1);
+    // Tree<Integer> t4 = new Tree<Integer>(3);
+    // Tree<Integer> t5 = new Tree<Integer>(-1);
+    // Tree<Integer> t6 = new Tree<Integer>(1);
+    t0.left = t1;
+    t0.right = t2;
+    t1.left = t3;
+    // t1.right = t4;
+    // t3.left = t5;
+    // t3.right = t6;
+    System.out.println(i.deleteFromBST(t0, new int[] {3, 2, 1}));
   }
 }
