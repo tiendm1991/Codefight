@@ -351,7 +351,7 @@ public class InterviewTree {
           parent.put(replace.right, replace);
           replace = replace.right;
         }
-        parent.get(replace).right = null;
+        parent.get(replace).right = replace.left;
         remove.value = replace.value;
       }
     } else {
@@ -366,19 +366,17 @@ public class InterviewTree {
 
   public static void main(String[] args) {
     InterviewTree i = new InterviewTree();
-    Tree<Integer> t0 = new Tree<Integer>(3);
+    Tree<Integer> t0 = new Tree<Integer>(5);
     Tree<Integer> t1 = new Tree<Integer>(2);
-    Tree<Integer> t2 = new Tree<Integer>(5);
+    Tree<Integer> t2 = new Tree<Integer>(6);
     Tree<Integer> t3 = new Tree<Integer>(1);
-    // Tree<Integer> t4 = new Tree<Integer>(3);
-    // Tree<Integer> t5 = new Tree<Integer>(-1);
-    // Tree<Integer> t6 = new Tree<Integer>(1);
+    Tree<Integer> t4 = new Tree<Integer>(4);
+    Tree<Integer> t5 = new Tree<Integer>(3);
     t0.left = t1;
     t0.right = t2;
     t1.left = t3;
-    // t1.right = t4;
-    // t3.left = t5;
-    // t3.right = t6;
-    System.out.println(i.deleteFromBST(t0, new int[] {3, 2, 1}));
+    t1.right = t4;
+    t4.left = t5;
+    System.out.println(i.deleteFromBST(t0, new int[] {5}));
   }
 }
