@@ -136,19 +136,45 @@ public class InterviewDfsBfs {
     }
   }
 
+  /// -----------longestPath
+  int longestPath(String fileSystem) {
+    fileSystem = fileSystem.replaceAll("\t", "!");
+    fileSystem = fileSystem.replaceAll("\f", "#");
+    String[] max = new String[1];
+    max[0] = "";
+    String cur = "";
+    Map<StrParent, StrParent> _map = new HashMap<>();
+    longestPathRecursive(fileSystem, cur, _map, max);
+    return max[0].length();
+  }
+
+
+  private void longestPathRecursive(String fileSystem, String cur, Map<StrParent, StrParent> _map, String[] max) {
+    int idx = fileSystem.indexOf("#!");
+    if (idx < 0) {
+      cur += fileSystem;
+      if (cur.contains("\\.") && cur.length() > max[0].length()) {
+        max[0] = cur;
+      }
+      return;
+    }
+    String f = fileSystem.substring(0, idx);
+    if (f.contains("\\.") && (cur + f).length() > max[0].length()) {
+      max[0] = cur + f;
+    } else {
+      cur += "/";
+    }
+    longestPathRecursive(fileSystem.substring(idx + 2), cur, _map, max);
+  }
+
+  static class StrParent {
+    String value;
+    StrParent parent;
+  }
+
   public static void main(String[] args) {
     InterviewDfsBfs i = new InterviewDfsBfs();
-    Tree<Integer> t0 = new Tree<Integer>(5);
-    Tree<Integer> t1 = new Tree<Integer>(2);
-    Tree<Integer> t2 = new Tree<Integer>(6);
-    Tree<Integer> t3 = new Tree<Integer>(1);
-    Tree<Integer> t4 = new Tree<Integer>(4);
-    Tree<Integer> t5 = new Tree<Integer>(3);
-    t0.left = t1;
-    t0.right = t2;
-    t1.left = t3;
-    t1.right = t4;
-    t4.left = t5;
-    System.out.println(i.largestValuesInTreeRows(t0));
+    String s = "user\f\tpictures\f\tdocuments\f\t\tnotes.txt";
+    System.out.println(i.longestPath(s));
   }
 }
