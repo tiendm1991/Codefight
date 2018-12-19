@@ -98,14 +98,14 @@ public class InterviewDfsBfs {
     while (!lsCheck.isEmpty()) {
       int max = Integer.MIN_VALUE;
       List<Tree<Integer>> lsCheckNew = new ArrayList<>();
-      for(Tree<Integer> tree: lsCheck) {
-        if(tree.value > max) {
+      for (Tree<Integer> tree : lsCheck) {
+        if (tree.value > max) {
           max = tree.value;
         }
-        if(tree.left != null) {
+        if (tree.left != null) {
           lsCheckNew.add(tree.left);
         }
-        if(tree.right != null) {
+        if (tree.right != null) {
           lsCheckNew.add(tree.right);
         }
       }
@@ -113,6 +113,27 @@ public class InterviewDfsBfs {
       lsCheck = lsCheckNew;
     }
     return result.stream().mapToInt(e -> e).toArray();
+  }
+
+  /// -----------digitTreeSum
+  long digitTreeSum(Tree<Integer> t) {
+    long[] sum = new long[1];
+    long pre = 0L;
+    digitTreeSumRecursive(pre, t, sum);
+    return sum[0];
+  }
+
+  private void digitTreeSumRecursive(long pre, Tree<Integer> t, long[] sum) {
+    pre = pre * 10 + t.value;
+    if (t.left == null && t.right == null) {
+      sum[0] += pre;
+    }
+    if (t.left != null) {
+      digitTreeSumRecursive(pre, t.left, sum);
+    }
+    if (t.right != null) {
+      digitTreeSumRecursive(pre, t.right, sum);
+    }
   }
 
   public static void main(String[] args) {
