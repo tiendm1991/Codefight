@@ -140,41 +140,63 @@ public class InterviewDfsBfs {
   int longestPath(String fileSystem) {
     fileSystem = fileSystem.replaceAll("\t", "!");
     fileSystem = fileSystem.replaceAll("\f", "#");
-    String[] max = new String[1];
-    max[0] = "";
-    String cur = "";
-    Map<StrParent, StrParent> _map = new HashMap<>();
-    longestPathRecursive(fileSystem, cur, _map, max);
-    return max[0].length();
-  }
-
-
-  private void longestPathRecursive(String fileSystem, String cur, Map<StrParent, StrParent> _map, String[] max) {
-    int idx = fileSystem.indexOf("#!");
-    if (idx < 0) {
-      cur += fileSystem;
-      if (cur.contains("\\.") && cur.length() > max[0].length()) {
-        max[0] = cur;
+    String[] split = fileSystem.split("#");
+    List<String> lsFile = new ArrayList<>();
+    for (String s : split) {
+      if (s.contains(".")) {
+        lsFile.add(s);
       }
-      return;
     }
-    String f = fileSystem.substring(0, idx);
-    if (f.contains("\\.") && (cur + f).length() > max[0].length()) {
-      max[0] = cur + f;
-    } else {
-      cur += "/";
+    int maxL = 0;
+    for (String max : lsFile) {
+      String r = "";
+      int count = -1, i = 0;
+      while (i < max.length()) {
+        if (max.charAt(i++) == '!') {
+          count++;
+        } else {
+          break;
+        }
+      }
+      r += max.replaceAll("!", "");
+      int iCur = indexOf(split, max) - 1;
+      while (count >= 0) {
+        String prefix = genatePrefix(count--);
+        for (int j = iCur; j >= 0; j--) {
+          String check = split[j];
+          if (check.contains(prefix) && !check.contains(prefix + "!")) {
+            r = check.replaceAll("!", "") + "/" + r;
+            iCur = j - 1;
+            break;
+          }
+        }
+      }
+      maxL = Math.max(maxL, r.length());
     }
-    longestPathRecursive(fileSystem.substring(idx + 2), cur, _map, max);
+
+    return maxL;
   }
 
-  static class StrParent {
-    String value;
-    StrParent parent;
+  private String genatePrefix(int count) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < count; i++) {
+      builder.append("!");
+    }
+    return builder.toString();
+  }
+
+  int indexOf(String[] values, String check) {
+    for (int i = 0; i < values.length; i++) {
+      if (values[i].equals(check)) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   public static void main(String[] args) {
     InterviewDfsBfs i = new InterviewDfsBfs();
-    String s = "user\f\tpictures\f\tdocuments\f\t\tnotes.txt";
+    String s = "a\f\tb\f\t\tc.txt\f\taaaa.txt";
     System.out.println(i.longestPath(s));
   }
 }
