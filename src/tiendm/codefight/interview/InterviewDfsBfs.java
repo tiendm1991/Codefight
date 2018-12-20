@@ -194,9 +194,46 @@ public class InterviewDfsBfs {
     return -1;
   }
 
+  /// ---------graphDistances
+  int[] graphDistances(int[][] g, int s) {
+    int[] dist = new int[g.length];
+    boolean[] visited = new boolean[g.length];
+    for (int i = 0; i < g.length; i++) {
+      if (i == s) {
+        dist[i] = 0;
+        continue;
+      }
+      dist[i] = Integer.MAX_VALUE;
+    }
+    for (int i = 0; i < g.length - 1; i++) {
+      int minIdx = minDist(dist, visited, g);
+      visited[minIdx] = true;
+      for (int j = 0; j < g.length; j++) {
+        if (g[minIdx][j] != -1 && dist[minIdx] != Integer.MAX_VALUE
+            && dist[minIdx] + g[minIdx][j] < dist[j]) {
+          dist[j] = dist[minIdx] + g[minIdx][j];
+        }
+      }
+    }
+    return dist;
+  }
+
+  int minDist(int[] dist, boolean[] visited, int[][] g) {
+    int minIdx = -1, min = Integer.MAX_VALUE;
+    for (int i = 0; i < dist.length; i++) {
+      if (!visited[i] && dist[i] <= min) {
+        minIdx = i;
+        min = dist[minIdx];
+      }
+    }
+    return minIdx;
+  }
+
+
   public static void main(String[] args) {
     InterviewDfsBfs i = new InterviewDfsBfs();
     String s = "a\f\tb\f\t\tc.txt\f\taaaa.txt";
-    System.out.println(i.longestPath(s));
+    int[][] g = {{-1, 3, 2}, {2, -1, 0}, {-1, 0, -1}};
+    System.out.println(i.graphDistances(g, 0));
   }
 }
