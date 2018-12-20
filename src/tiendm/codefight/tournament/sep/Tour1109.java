@@ -42,7 +42,7 @@ public class Tour1109 {
   }
 
   int smallestUnusualNumber(String a) {
-    if (a.indexOf("0") >= 0)
+    if (a.indexOf("0") >= 0 || (a.length() == 2 && a.contains("1")))
       return 0;
     return 10 - (a.charAt(a.length() - 1) - '0');
   }
