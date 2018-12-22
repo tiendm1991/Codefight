@@ -2,6 +2,7 @@ package tiendm.codefight.interview;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InterviewBacktracking {
 
@@ -12,23 +13,24 @@ public class InterviewBacktracking {
       return result;
     }
     ArrayList<Integer> first = new ArrayList<>();
-    climbingBacktrack(first, result, n, k);
+    climbingBacktrack(first, result, 0, n, k);
     return result;
   }
 
-  void climbingBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, int n, int k) {
+  void climbingBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, int idx, int n,
+      int k) {
     for (int i = 1; i <= k; i++) {
-      int s = sum(cur);
-      if (s + i > n) {
-        break;
+      ArrayList<Integer> clone = clone(cur);
+      clone.add(idx, i);
+      int sum = sum(clone);
+      if (sum == n) {
+        result.add(clone);
+      } else if (sum < n) {
+        climbingBacktrack(clone, result, idx + 1, n, k);
       } else {
-        cur.add(i);
-        if (s + i == n) {
-          result.add(cur);
-        }
+        break;
       }
     }
-    
   }
 
   int sum(ArrayList<Integer> list) {
@@ -37,6 +39,13 @@ public class InterviewBacktracking {
       s += x;
     }
     return s;
+  }
+
+  ArrayList<Integer> clone(ArrayList<Integer> list) {
+    if (list.isEmpty()) {
+      return new ArrayList<>();
+    }
+    return (ArrayList<Integer>) list.stream().map(e -> e).collect(Collectors.toList());
   }
 
   public static void main(String[] args) {
