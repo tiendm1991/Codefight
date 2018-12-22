@@ -1,11 +1,12 @@
 package tiendm.codefight.interview;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InterviewBacktracking {
-
+  // --------climbingStaircase
   List<ArrayList<Integer>> climbingStaircase(int n, int k) {
     List<ArrayList<Integer>> result = new ArrayList<>();
     if (n == 0 || k == 0) {
@@ -48,8 +49,53 @@ public class InterviewBacktracking {
     return (ArrayList<Integer>) list.stream().map(e -> e).collect(Collectors.toList());
   }
 
+  // -------nQueen
+  List<int[]> nQueens(int n) {
+    List<int[]> result = new ArrayList<>();
+    int[] cur = new int[n];
+    queenBacktrack(cur, 0, result, n);
+    return result;
+  }
+
+  void queenBacktrack(int[] cur, int row, List<int[]> result, int n) {
+    if (row == n) {
+      result.add(cloneArr(cur));
+      return;
+    }
+    for (int i = 1; i <= n; i++) {
+      if (isSafe(cur, row, i)) {
+        cur[row] = i;
+        queenBacktrack(cur, row + 1, result, n);
+        cur[row] = 0;
+      }
+    }
+  }
+
+  boolean isSafe(int[] q, int row, int col) {
+    for (int i = 0; i < row; i++) {
+      if (q[i] == col) {
+        return false;
+      }
+    }
+    for (int i = 0; i < row; i++) {
+      if (q[i] - i == col - row) {
+        return false;
+      }
+    }
+    for (int i = 0; i < row; i++) {
+      if (q[i] + i == row + col)
+        return false;
+    }
+    return true;
+  }
+
+  int[] cloneArr(int[] source) {
+    return Arrays.copyOfRange(source, 0, source.length);
+  }
+
   public static void main(String[] args) {
     InterviewBacktracking i = new InterviewBacktracking();
-    System.out.println(i.climbingStaircase(4, 2));
+    int[] x = {1, 2, 3};
+    System.out.println(i.nQueens(4));
   }
 }
