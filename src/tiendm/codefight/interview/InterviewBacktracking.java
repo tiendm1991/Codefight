@@ -226,11 +226,21 @@ public class InterviewBacktracking {
     if (a == null || a.length == 0 || sum == 0) {
       return "Empty";
     }
+    Arrays.sort(a);
+    List<Integer> input = new ArrayList<>();
+    for(int i : a){
+      if(!input.contains(i)){
+        input.add(i);
+      }
+    }
     List<ArrayList<Integer>> result = new ArrayList<>();
+    ArrayList<Integer> first = new ArrayList<>();
+    combinationBacktrack(first, result, input, sum);
     if (result.isEmpty()) {
       return "Empty";
     }
     String strResult = "";
+    List<String> track = new ArrayList<>();
     for (ArrayList<Integer> ls : result) {
       String s = "(";
       for (int x : ls) {
@@ -238,14 +248,37 @@ public class InterviewBacktracking {
       }
       s = s.trim();
       s += ")";
-      strResult += s;
+      if(!track.contains(s)){
+        strResult += s;
+      }
     }
     return strResult;
   }
 
+  void combinationBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, List<Integer> a,
+      int sum) {
+    int min = (cur.size() == 0) ? 0 : cur.get(cur.size() - 1);
+    for (int i : a) {
+      if (i < min) {
+        continue;
+      }
+      ArrayList<Integer> clone = cloneList(cur);
+      int s = sum(clone);
+      if (s + i == sum) {
+        clone.add(i);
+        result.add(clone);
+      } else if (s + i < sum) {
+        clone.add(i);
+        combinationBacktrack(clone, result, a, sum);
+      } else {
+        break;
+      }
+    }
+  }
+
   public static void main(String[] args) {
     InterviewBacktracking i = new InterviewBacktracking();
-    int[] x = {2, 3, 5, 9};
-    System.out.println(i.combinationSum(x, 9));
+    int[] x = {1, 1, 1, 3, 7, 3};
+    System.out.println(i.combinationSum(x, 15));
   }
 }
