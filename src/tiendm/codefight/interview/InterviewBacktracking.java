@@ -163,13 +163,13 @@ public class InterviewBacktracking {
       for (int j = 0; j < board[0].length; j++) {
         if (board[i][j] == first) {
           List<String> track = new ArrayList<>();
-          if(isWordBoggleBAcktrack(board, track, s, 0, i, j)){
+          if (isWordBoggleBAcktrack(board, track, s, 0, i, j)) {
             return true;
           }
         }
       }
     }
-    return false;    
+    return false;
   }
 
   boolean isWordBoggleBAcktrack(char[][] board, List<String> track, String s, int idx, int row,
@@ -221,13 +221,31 @@ public class InterviewBacktracking {
     return false;
   }
 
+  /// ---------combinationSum
+  String combinationSum(int[] a, int sum) {
+    if (a == null || a.length == 0 || sum == 0) {
+      return "Empty";
+    }
+    List<ArrayList<Integer>> result = new ArrayList<>();
+    if (result.isEmpty()) {
+      return "Empty";
+    }
+    String strResult = "";
+    for (ArrayList<Integer> ls : result) {
+      String s = "(";
+      for (int x : ls) {
+        s += (x + " ");
+      }
+      s = s.trim();
+      s += ")";
+      strResult += s;
+    }
+    return strResult;
+  }
+
   public static void main(String[] args) {
     InterviewBacktracking i = new InterviewBacktracking();
-    char[][] board = {{'O','T','T','S'}, 
-                      {'H','O','P','E'}, 
-                      {'E','R','A','R'}, 
-                      {'M','O','D','N'}};
-    String[] words = {"DREAR"};
-    System.out.println(i.wordBoggle(board, words));
+    int[] x = {2, 3, 5, 9};
+    System.out.println(i.combinationSum(x, 9));
   }
 }
