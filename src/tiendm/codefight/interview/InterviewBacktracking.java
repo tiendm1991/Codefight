@@ -21,7 +21,7 @@ public class InterviewBacktracking {
   void climbingBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, int idx, int n,
       int k) {
     for (int i = 1; i <= k; i++) {
-      ArrayList<Integer> clone = clone(cur);
+      ArrayList<Integer> clone = cloneList(cur);
       clone.add(idx, i);
       int sum = sum(clone);
       if (sum == n) {
@@ -42,7 +42,7 @@ public class InterviewBacktracking {
     return s;
   }
 
-  ArrayList<Integer> clone(ArrayList<Integer> list) {
+  ArrayList<Integer> cloneList(ArrayList<Integer> list) {
     if (list.isEmpty()) {
       return new ArrayList<>();
     }
@@ -93,9 +93,59 @@ public class InterviewBacktracking {
     return Arrays.copyOfRange(source, 0, source.length);
   }
 
+  //// ------------sumSubsets
+  List<ArrayList<Integer>> sumSubsets(int[] arr, int num) {
+    List<ArrayList<Integer>> result = new ArrayList<>();
+    if (num == 0 || arr == null || arr.length == 0) {
+      result.add(new ArrayList<>());
+      return result;
+    }
+    Arrays.sort(arr);
+    ArrayList<Integer> first = new ArrayList<>();
+    subsetSumBacktrack(first, result, 0, num, arr);
+    return result;
+  }
+
+  void subsetSumBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, int idx, int num,
+      int[] arr) {
+    for (int i = idx; i < arr.length; i++) {
+      ArrayList<Integer> clone = cloneList(cur);
+      clone.add(arr[i]);
+      int sum = sum(clone);
+      if (sum == num && !isExist(result, clone)) {
+        result.add(clone);
+      } else if (sum < num) {
+        subsetSumBacktrack(clone, result, i + 1, num, arr);
+      } else {
+        break;
+      }
+    }
+  }
+
+  boolean isExist(List<ArrayList<Integer>> result, ArrayList<Integer> check) {
+    for (ArrayList<Integer> ls : result) {
+      boolean isEqual = true;
+      if (ls.size() != check.size()) {
+        continue;
+      }
+      for (int i = 0; i < ls.size(); i++) {
+        if (!ls.get(i).equals(check.get(i))) {
+          isEqual = false;
+          break;
+        }
+      }
+      if (isEqual) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static void main(String[] args) {
     InterviewBacktracking i = new InterviewBacktracking();
-    int[] x = {1, 2, 3};
-    System.out.println(i.nQueens(4));
+    int[] x = {5, 17, 27, 39, 54, 58, 63, 128, 132, 141, 142, 146, 146, 169, 176, 215, 219, 224,
+        232, 237, 252, 266, 273, 279, 279, 292, 318, 322, 323, 325, 326, 347, 367, 370, 372, 383,
+        392, 400, 402, 402, 411, 412, 417, 420, 438, 439, 452, 486, 489, 495};
+    System.out.println(i.sumSubsets(x, 500));
   }
 }
