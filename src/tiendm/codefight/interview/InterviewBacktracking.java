@@ -2,6 +2,7 @@ package tiendm.codefight.interview;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -141,11 +142,92 @@ public class InterviewBacktracking {
     return false;
   }
 
+  // -------wordBoggle
+  List<String> wordBoggle(char[][] board, String[] words) {
+    List<String> result = new ArrayList<>();
+    if (board.length == 0 || board[0].length == 0) {
+      return result;
+    }
+    for (String s : words) {
+      if (isWordBoggle(board, s)) {
+        result.add(s);
+      }
+    }
+    Collections.sort(result);
+    return result;
+  }
+
+  boolean isWordBoggle(char[][] board, String s) {
+    char first = s.charAt(0);
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board[0].length; j++) {
+        if (board[i][j] == first) {
+          List<String> track = new ArrayList<>();
+          if(isWordBoggleBAcktrack(board, track, s, 0, i, j)){
+            return true;
+          }
+        }
+      }
+    }
+    return false;    
+  }
+
+  boolean isWordBoggleBAcktrack(char[][] board, List<String> track, String s, int idx, int row,
+      int col) {
+    if (idx == s.length()) {
+      return true;
+    }
+    if (row < 0 || col < 0 || row >= board.length || col >= board[0].length) {
+      return false;
+    }
+    char c = s.charAt(idx);
+    if (board[row][col] != c || track.contains(row + "-" + col)) {
+      return false;
+    }
+    track.add(row + "-" + col);
+    boolean x1 = isWordBoggleBAcktrack(board, track, s, idx + 1, row - 1, col - 1);
+    if (x1) {
+      return true;
+    }
+    boolean x2 = isWordBoggleBAcktrack(board, track, s, idx + 1, row - 1, col);
+    if (x2) {
+      return true;
+    }
+    boolean x3 = isWordBoggleBAcktrack(board, track, s, idx + 1, row - 1, col + 1);
+    if (x3) {
+      return true;
+    }
+    boolean x4 = isWordBoggleBAcktrack(board, track, s, idx + 1, row, col - 1);
+    if (x4) {
+      return true;
+    }
+    boolean x5 = isWordBoggleBAcktrack(board, track, s, idx + 1, row, col + 1);
+    if (x5) {
+      return true;
+    }
+    boolean x6 = isWordBoggleBAcktrack(board, track, s, idx + 1, row + 1, col - 1);
+    if (x6) {
+      return true;
+    }
+    boolean x7 = isWordBoggleBAcktrack(board, track, s, idx + 1, row + 1, col);
+    if (x7) {
+      return true;
+    }
+    boolean x8 = isWordBoggleBAcktrack(board, track, s, idx + 1, row + 1, col + 1);
+    if (x8) {
+      return true;
+    }
+    track.remove(row + "-" + col);
+    return false;
+  }
+
   public static void main(String[] args) {
     InterviewBacktracking i = new InterviewBacktracking();
-    int[] x = {5, 17, 27, 39, 54, 58, 63, 128, 132, 141, 142, 146, 146, 169, 176, 215, 219, 224,
-        232, 237, 252, 266, 273, 279, 279, 292, 318, 322, 323, 325, 326, 347, 367, 370, 372, 383,
-        392, 400, 402, 402, 411, 412, 417, 420, 438, 439, 452, 486, 489, 495};
-    System.out.println(i.sumSubsets(x, 500));
+    char[][] board = {{'O','T','T','S'}, 
+                      {'H','O','P','E'}, 
+                      {'E','R','A','R'}, 
+                      {'M','O','D','N'}};
+    String[] words = {"DREAR"};
+    System.out.println(i.wordBoggle(board, words));
   }
 }
