@@ -228,8 +228,9 @@ public class InterviewBacktracking {
     }
     Arrays.sort(a);
     List<Integer> input = new ArrayList<>();
-    for(int i : a){
-      if(!input.contains(i)){
+    input.add(a[0]);
+    for (int i = 1; i < a.length; i++) {
+      if (a[i] != a[i-1]) {
         input.add(i);
       }
     }
@@ -248,15 +249,16 @@ public class InterviewBacktracking {
       }
       s = s.trim();
       s += ")";
-      if(!track.contains(s)){
+      if (!track.contains(s)) {
+        track.add(s);
         strResult += s;
       }
     }
     return strResult;
   }
 
-  void combinationBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result, List<Integer> a,
-      int sum) {
+  void combinationBacktrack(ArrayList<Integer> cur, List<ArrayList<Integer>> result,
+      List<Integer> a, int sum) {
     int min = (cur.size() == 0) ? 0 : cur.get(cur.size() - 1);
     for (int i : a) {
       if (i < min) {
