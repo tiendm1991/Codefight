@@ -53,6 +53,7 @@ public class InterviewDfsBfs {
       return new int[0];
     }
     Map<Tree<Integer>, Tree<Integer>> _mapParent = new HashMap<>();
+    @SuppressWarnings("unchecked")
     Tree<Integer>[] _maxTree = new Tree[1];
     int[] max = new int[1];
     max[0] = Integer.MIN_VALUE;
@@ -232,7 +233,6 @@ public class InterviewDfsBfs {
 
   public static void main(String[] args) {
     InterviewDfsBfs i = new InterviewDfsBfs();
-    String s = "a\f\tb\f\t\tc.txt\f\taaaa.txt";
     int[][] g = {{-1, 3, 2}, {2, -1, 0}, {-1, 0, -1}};
     System.out.println(i.graphDistances(g, 0));
   }
