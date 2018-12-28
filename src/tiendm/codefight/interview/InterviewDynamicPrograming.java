@@ -42,7 +42,7 @@ public class InterviewDynamicPrograming {
 
   public static void main(String[] args) {
     InterviewDynamicPrograming i = new InterviewDynamicPrograming();
-    int[] x = {2, 9, 7, 1};
+    int[] x = {2, 9, 1, 1, 6, 3, 2, 7};
     System.out.println(i.houseRobber(x));// 10
   }
 }
