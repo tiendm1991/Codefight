@@ -47,28 +47,6 @@ public class Tour1114 {
     return java.util.regex.Pattern.compile("\\s").matcher(input).find();
   }
 
-  boolean isPangram(String sentence) {
-    boolean[] found = new boolean[26];
-    boolean result = true;
-    for (int i = 0; i < sentence.length(); i++) {
-      int code = (int) sentence.charAt(i);
-      if ((int) 'A' <= code && code <= (int) 'Z') {
-        code += (int) 'a' - (int) 'A';
-      }
-      if ((int) 'a' <= code && code <= (int) 'z') {
-        found[code - 'a'] = true;
-      }
-    }
-
-    for (int i = 0; i < 26; i++) {
-      if (!found[i]) {
-        result = false;
-      }
-    }
-
-    return result;
-  }
-
   boolean bettingGame(int[] l) {
 
     int s = 0;

@@ -1,5 +1,8 @@
 package tiendm.codefight.interview;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InterviewDynamicPrograming {
 
   // ----------climbingStairs
@@ -40,9 +43,50 @@ public class InterviewDynamicPrograming {
     return dp[dp.length - 1];
   }
 
+  // -----composeRanges
+  List<String> composeRanges(int[] nums) {
+    List<String> result = new ArrayList<>();
+    if (nums.length == 0) {
+      return result;
+    }
+    if (nums.length == 1) {
+      result.add(nums[0] + "");
+      return result;
+    }
+    String strCur = nums[0] + "";
+    int cur = nums[0];
+    boolean single = true;
+    for (int i = 1; i < nums.length; i++) {
+      if (nums[i] == cur + 1) {
+        if (i == nums.length - 1) {
+          strCur += "->" + nums[i];
+          result.add(strCur);
+          break;
+        }
+        cur = nums[i];
+        single = false;
+      } else {
+        if (single) {
+          result.add(strCur);
+        } else {
+          strCur += "->" + cur;
+          result.add(strCur);
+        }
+        cur = nums[i];
+        strCur = cur + "";
+        single = true;
+        if (i == nums.length - 1) {
+          result.add(cur+"");
+        }
+      }
+    }
+    return result;
+  }
+
+
   public static void main(String[] args) {
     InterviewDynamicPrograming i = new InterviewDynamicPrograming();
-    int[] x = {2, 9, 1, 1, 6, 3, 2, 7};
-    System.out.println(i.houseRobber(x));// 10
+    int[] x = {0,1};
+    System.out.println(i.composeRanges(x));// 10
   }
 }
