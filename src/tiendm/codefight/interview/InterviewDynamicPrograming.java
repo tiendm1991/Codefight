@@ -90,7 +90,7 @@ public class InterviewDynamicPrograming {
     String[] arr = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
         "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"};
     List<String> legal = Stream.of(arr).map(e -> e).collect(Collectors.toList());
-    if(message.length() == 1 && !legal.contains(message)){
+    if (message.length() == 1 && !legal.contains(message)) {
       return 0;
     }
     if (message.length() == 0 || (message.length() == 1 && legal.contains(message))) {
@@ -123,7 +123,8 @@ public class InterviewDynamicPrograming {
     }
     return x2;
   }
-  //----mapDecoding revursive
+
+  // ----mapDecoding revursive
   private int map(String message, List<String> legal, Map<String, Integer> cache, final int MAX) {
     if (message.length() == 0 || (message.length() == 1 && legal.contains(message))) {
       cache.put(message, 1);
@@ -151,6 +152,17 @@ public class InterviewDynamicPrograming {
       return x1 % MAX;
     }
   }
+
+  // ---------fillingBlocks
+  int fillingBlocks(int n) {
+    if (n == 1) {
+      return 1;
+    }
+    if (n == 2) {
+      return 5;
+    }
+  }
+
 
   public static void main(String[] args) {
     InterviewDynamicPrograming i = new InterviewDynamicPrograming();
