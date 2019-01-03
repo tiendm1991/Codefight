@@ -155,12 +155,30 @@ public class InterviewDynamicPrograming {
 
   // ---------fillingBlocks
   int fillingBlocks(int n) {
+    // f(n) = f(n−1) + 5f(n−2) + f(n−3) − f(n−4).
     if (n == 1) {
       return 1;
     }
     if (n == 2) {
       return 5;
     }
+    if (n == 3) {
+      return 11;
+    }
+    if (n == 4) {
+      return 36;
+    }
+    int x1 = 1, x2 = 5, x3 = 11, x4 = 36, x5 = 0;
+    int i = 5;
+    while (i <= n) {
+      x5 = x4 + 5 * x3 + x2 - x1;
+      x1 = x2;
+      x2 = x3;
+      x3 = x4;
+      x4 = x5;
+      i++;
+    }
+    return x5;
   }
 
 
