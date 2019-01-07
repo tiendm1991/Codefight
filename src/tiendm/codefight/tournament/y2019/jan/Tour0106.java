@@ -1,4 +1,4 @@
-package tiendm.codefight.tournament.y2019.Jan;
+package tiendm.codefight.tournament.y2019.jan;
 
 public class Tour0106 {
   int[][] spiralNumbers(int n) {

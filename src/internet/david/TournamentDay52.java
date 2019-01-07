@@ -1,6 +1,10 @@
 package internet.david;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Davit on 03/08/16.
@@ -173,6 +177,33 @@ public class TournamentDay52 {
     }
     return result;
 
+  }
+
+  int josephusProblem(int n, int k) {
+
+    boolean[] removed = new boolean[n];
+    int currentPerson = 0;
+
+    for (int i = 1; i < n; i++) {
+      int skipped = 0;
+      while (skipped < k - 1) {
+        if (!removed[currentPerson]) {
+          skipped++;
+        }
+        currentPerson = (currentPerson + 1) % n;
+      }
+      while (removed[currentPerson]) {
+        currentPerson = (currentPerson + 1) % n;
+      }
+      removed[currentPerson] = true;
+    }
+
+    for (int i = 0; i < n; i++) {
+      if (!removed[i]) {
+        return i + 1;
+      }
+    }
+    return 0;
   }
 
   private static boolean isPowerOfTwo(int n) {

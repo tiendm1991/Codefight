@@ -158,14 +158,6 @@ public class Tour1024 {
     return res;
   }
 
-  int countLineColorings(int points, int colors) {
-    if (points == 1)
-      return colors;
-    if (colors == 1)
-      return 1;
-    return colors * countLineColorings(points - 1, colors - 1);
-  }
-
   int boxPiles(int[] a) {
 
     Arrays.sort(a);
