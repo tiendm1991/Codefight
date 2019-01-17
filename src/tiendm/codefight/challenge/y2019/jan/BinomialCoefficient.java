@@ -2,6 +2,9 @@ package tiendm.codefight.challenge.y2019.jan;
 
 public class BinomialCoefficient {
   long binomialCoefficient(int n, int k) {
+    if (k > n / 2) {
+      k = n - k;
+    }
     long[][] dp = new long[k + 1][n + 1];
     for (int i = 0; i <= n; i++) {
       dp[0][i] = 1;
@@ -22,7 +25,7 @@ public class BinomialCoefficient {
 
   public static void main(String[] args) {
     BinomialCoefficient b = new BinomialCoefficient();
-    System.out.println(b.binomialCoefficient(3, 2));
+    System.out.println(b.binomialCoefficient(93, 60));
   }
 
 }
