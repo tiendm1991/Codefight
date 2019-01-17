@@ -114,24 +114,24 @@ public class Util {
     return fact(n - 1) * n;
   }
 
-  int combine1(int k, int n) {
+  int binomialCoefficient1(int k, int n) {
     return fact(n) / (fact(k) * fact(n - k));
   }
 
-  int combine2(int k, int n) {
+  int binomialCoefficient2(int k, int n) {
     if (k == 0 || k == n)
       return 1;
     if (k == 1 || k == n - 1)
       return n;
-    return combine2(k - 1, n - 1) + combine2(k, n - 1);
+    return binomialCoefficient2(k - 1, n - 1) + binomialCoefficient2(k, n - 1);
   }
 
-  int combine3(int n, int k) {
+  int binomialCoefficient3(int n, int k) {
     if (k == 0 || k == n)
       return 1;
     if (k == 1 || k == n - 1)
       return n;
-    return combine2(n - 1, k - 1) + combine2(n - 1, k);
+    return binomialCoefficient3(n - 1, k - 1) + binomialCoefficient3(n - 1, k);
   }
 
   int fibo(int n) {
@@ -180,7 +180,7 @@ public class Util {
     Util u = new Util();
     int k = 6;
     int n = 12;
-    System.out.println(u.combine1(k, n));
-    System.out.println(u.combine2(k, n));
+    System.out.println(u.binomialCoefficient1(k, n));
+    System.out.println(u.binomialCoefficient2(k, n));
   }
 }
