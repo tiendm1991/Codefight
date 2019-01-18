@@ -72,25 +72,6 @@ public class Tour3008 {
     return true;
   }
 
-  int[] sortByHeight(int[] a) {
-    for (int i = 0; i < a.length; i++) {
-      int minIndex = -1, tmp = a[i];
-      if (a[i] == -1) {
-        continue;
-      }
-      for (int j = i; j < a.length; j++) {
-        if (a[j] != -1) {
-          if (minIndex == -1 || a[j] < a[minIndex]) {
-            minIndex = j;
-          }
-        }
-      }
-      a[i] = a[minIndex];
-      a[minIndex] = tmp;
-    }
-    return a;
-  }
-
   public static void main(String[] args) {
     Tour3008 t = new Tour3008();
     int[][] x = {{0, 1, 2, 3}, {1, 2, 3, 0}, {1, 1, 1}};

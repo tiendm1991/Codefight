@@ -1,6 +1,15 @@
 package tiendm.codefight.core;
 
 public class ListForest {
+  int[] firstReverseTry(int[] arr) {
+    if (arr.length < 2)
+      return arr;
+    int tmp = arr[0];
+    arr[0] = arr[arr.length - 1];
+    arr[arr.length - 1] = tmp;
+    return arr;
+  }
+
   int[] arrayReplace(int[] inputArray, int elemToReplace, int substitutionElem) {
     for (int i = 0; i < inputArray.length; i++) {
       if (inputArray[i] == elemToReplace)

@@ -59,6 +59,21 @@ public class CornerBit {
     return sum;
   }
 
+  int secondRightmostZeroBit(int n) {
+    return 1 << index(n);
+  }
+
+  int index(int n) {
+    int count = 0, idx = 0;
+    while (count < 2) {
+      if ((n & 1) == 0)
+        count++;
+      idx++;
+      n = n >> 1;
+    }
+    return idx - 1;
+  }
+
   int swapBit(int n) {
     int length = (int) (Math.log(n) / Math.log(2));
     int sum = 0, bit1 = 0, bit2 = 0;
@@ -73,6 +88,21 @@ public class CornerBit {
   int swapBitSolution(int n) {
     return ((n & 0b01010101010101010101010101010101) << 1)
         | ((n & 0b10101010101010101010101010101010) >> 1);
+  }
+  
+  int swapAdjacentBits(int n) {
+    return swapbit2(n) ;
+  }
+
+  int swapbit2(int n){
+      int length = (int) (Math.log(n) / Math.log(2)) ;
+      int sum = 0, bit1 = 0, bit2 = 0;
+      for(int i = 0; i <= length; i+=2){
+        bit1 = (n >> i) & 1;
+        bit2 = (n >> (i+1)) & 1;
+        sum += (bit1 << (i+1)) + (bit2 << i);
+      }
+      return sum;
   }
 
   int differentRightmostBit(int n, int m) {

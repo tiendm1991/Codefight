@@ -5,6 +5,98 @@ import java.util.Collections;
 import java.util.List;
 
 public class SpringIntegration {
+  boolean alphanumericLess(String s1, String s2) {
+    List<String> ls1 = splitString(s1);
+    List<String> ls2 = splitString(s2);
+    for (int i = 0; i < ls2.size(); i++) {
+      try {
+        String str1 = ls1.get(i);
+        String str2 = ls2.get(i);
+        if (str1.equals(str2))
+          continue;
+        if (isStrDigit(str1) > -1) {
+          if (isStrDigit(str2) == -1)
+            return true;
+          else {
+            if (isStrDigit(str1) != isStrDigit(str2))
+              return isStrDigit(str1) < isStrDigit(str2);
+          }
+        } else {
+          if (isStrDigit(str2) > -1)
+            return false;
+          else {
+            return str1.compareTo(str2) < 0;
+          }
+        }
+      } catch (Exception e) {
+        return true;
+      }
+    }
+    for (int i = 0; i < ls2.size(); i++) {
+      String str1 = ls1.get(i);
+      String str2 = ls2.get(i);
+      if (isStrDigit(str1) > -1 && isStrDigit(str2) > -1) {
+        int x = compareDigit(str1, str2);
+        if (x != 0) {
+          return x < 0;
+        }
+      }
+    }
+    return false;
+  }
+
+  List<String> splitString(String s) {
+    int l = s.length();
+    List<String> ls = new ArrayList<>();
+    int mark = 0;
+    for (int i = 0; i < l - 1; i++) {
+      char c = s.charAt(i);
+      if (!isDigit(c)) {
+        ls.add(s.substring(i, i + 1));
+        if (i == l - 2 && isDigit(s.charAt(i + 1))) {
+          mark = i + 1;
+        }
+      } else {
+        if ((i > 0 && !isDigit(s.charAt(i - 1)))) {
+          mark = i;
+        }
+        if (!isDigit(s.charAt(i + 1))) {
+          ls.add(s.substring(mark, i + 1));
+        }
+      }
+    }
+    if (!isDigit(s.charAt(l - 1)))
+      ls.add(s.substring(l - 1));
+    else {
+      ls.add(s.substring(mark, l));
+    }
+    return ls;
+  }
+
+  boolean isDigit(char c) {
+    return c >= '0' && c <= '9';
+  }
+
+  int isStrDigit(String s) {
+    try {
+      return Integer.parseInt(s);
+    } catch (Exception e) {
+      return -1;
+    }
+  }
+
+  int compareDigit(String d1, String d2) {
+    Integer i1 = Integer.parseInt(d1);
+    Integer i2 = Integer.parseInt(d2);
+    if (i1.equals(i2)) {
+      if (d1.length() == d2.length())
+        return 0;
+      return d1.length() < d2.length() ? 1 : -1;
+    } else {
+      return i1 < i2 ? -1 : 1;
+    }
+  }
+
   ///////////////////////////////////////////////
   int arrayConversion(int[] inputArray) {
     List<Integer> lsTrack = new ArrayList<>();

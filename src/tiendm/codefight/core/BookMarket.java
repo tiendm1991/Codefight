@@ -1,7 +1,5 @@
 package tiendm.codefight.core;
 
-import javax.swing.text.AbstractDocument.LeafElement;
-
 public class BookMarket {
   String properNounCorrection(String noun) {
     return noun.substring(0, 1).toUpperCase() + noun.substring(1).toLowerCase();

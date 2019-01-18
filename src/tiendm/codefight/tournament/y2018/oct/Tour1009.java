@@ -15,10 +15,6 @@ public class Tour1009 {
     return count;
   }
 
-  int circleOfNumbers(int n, int firstNumber) {
-    return (firstNumber + (n / 2)) % n;
-  }
-
   public static void main(String[] args) {
     Tour1009 t = new Tour1009();
     int[] toV = {3, 2, 1, 3, 2, 1, 4};

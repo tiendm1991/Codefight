@@ -126,6 +126,31 @@ public class InterGration {
     return true;
   }
 
+  boolean adaNumber(String line) {
+    String[] ada = line.toUpperCase().replace("_", "").split("#");
+    if (ada.length == 1) {
+      if (line.indexOf("#") >= 0)
+        return false;
+      return ada[0].matches("[0-9]+");
+    }
+    if (line.charAt(line.length() - 1) != '#')
+      return false;
+
+    if (ada.length > 2)
+      return false;
+    try {
+      int base = Integer.parseInt(ada[0]);
+      if (base > 16)
+        return false;
+      for (int i = 0; i < ada[1].length(); i++)
+        Integer.valueOf(ada[1].substring(i, i + 1), base);
+
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
   int threeSplit(int[] a) {
     int sum = 0, n = a.length, count = 0, sum1 = 0, sum2 = 0;
     for (int i : a) {
