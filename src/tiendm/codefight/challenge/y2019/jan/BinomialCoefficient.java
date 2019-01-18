@@ -29,7 +29,7 @@ public class BinomialCoefficient {
 
   public static void main(String[] args) {
     BinomialCoefficient b = new BinomialCoefficient();
-    System.out.println(b.binomialCoefficient(93, 60));
+    System.out.println(b.binomialCoefficient(169, 13));
   }
 
 }
