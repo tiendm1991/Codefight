@@ -2,6 +2,7 @@ package tiendm.codefight.challenge.y2019.jan;
 
 public class BinomialCoefficient {
   long binomialCoefficient(int n, int k) {
+    long limit = (long) Math.pow(2, 53);
     if (k > n / 2) {
       k = n - k;
     }
@@ -17,6 +18,9 @@ public class BinomialCoefficient {
           dp[i][j] = 1;
         } else {
           dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];
+        }
+        if (dp[i][j] >= limit) {
+          return -1;
         }
       }
     }
