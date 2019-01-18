@@ -27,9 +27,10 @@ public class BinomialCoefficient {
     return dp[k][n];
   }
 
+
   public static void main(String[] args) {
     BinomialCoefficient b = new BinomialCoefficient();
-    System.out.println(b.binomialCoefficient(169, 13));
+    int[] x = {1, 3, 2, 1};
   }
 
 }
