@@ -311,24 +311,6 @@ public class Tour1026 {
     return -1;
   }
 
-  String decipher(String cipher) {
-
-    String result = "";
-    for (int i = 0; i < cipher.length();) {
-      int len;
-      if (cipher.charAt(i) == '1') {
-        len = 3;
-      } else {
-        len = 2;
-      }
-      int code = Integer.parseInt(cipher.substring(i, i + len));
-      result += (char) code;
-      i += len;
-    }
-
-    return result;
-  }
-
   String[] isDivisibleBy6(String inputString) {
 
     int digitSum = 0;

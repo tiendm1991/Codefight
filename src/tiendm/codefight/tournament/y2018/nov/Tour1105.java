@@ -143,37 +143,6 @@ public class Tour1105 {
     }
   }
 
-  boolean isIPv4Address(String inputString) {
-
-    int currentNumber = 0;
-    boolean emptyField = true;
-    int countNumbers = 0;
-
-    inputString += '.';
-
-    for (int i = 0; i < inputString.length(); i++) {
-      if (inputString.charAt(i) == '.') {
-        if (emptyField) {
-          return false;
-        }
-        countNumbers++;
-        currentNumber = 0;
-        emptyField = true;
-      } else {
-        int digit = inputString.charAt(i) - '0';
-        if (digit < 0 || digit > 9) {
-          return false;
-        }
-        emptyField = false;
-        currentNumber = currentNumber * 10 + digit;
-        if (currentNumber > 255) {
-          return false;
-        }
-      }
-    }
-    return countNumbers == 4;
-  }
-
   int factorSum(int n) {
 
     int prevValue = 0, currentValue = 0, nextValue = n;
