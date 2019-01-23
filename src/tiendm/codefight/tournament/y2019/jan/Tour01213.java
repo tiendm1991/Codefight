@@ -1,5 +1,6 @@
 package tiendm.codefight.tournament.y2019.jan;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +69,21 @@ public class Tour01213 {
       default:
         return -1;
     }
+  }
+
+  List<Integer> zFunctionNaive(String s) {
+    List<Integer> ls = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      ls.add(0);
+      for (int j = i; j < s.length(); j++) {
+        if (s.charAt(j) == s.charAt(ls.get(i))) {
+          ls.set(i, ls.get(i) + 1);
+        } else {
+          break;
+        }
+      }
+    }
+    return ls;
   }
 
   public static void main(String[] args) {
