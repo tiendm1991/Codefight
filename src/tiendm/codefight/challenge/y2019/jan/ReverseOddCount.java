@@ -1,4 +1,4 @@
-package tiendm.codefight.challenge;
+package tiendm.codefight.challenge.y2019.jan;
 
 public class ReverseOddCount {
   String reverseOddCount(String str) {
