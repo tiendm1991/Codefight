@@ -204,13 +204,9 @@ public class Util {
   }
 
   boolean Overlapping(int[] arr) {
-    int min1 = Math.min(arr[0], arr[1]);
-    int max1 = Math.max(arr[0], arr[1]);
-    int min2 = Math.min(arr[2], arr[3]);
-    int max2 = Math.max(arr[2], arr[3]);
-    if (min1 > max2)
-      return min1 - max2 + 1 >= arr[4];
-    return min2 - max1 + 1 >= arr[4];
+    if (arr[0] > arr[1] || arr[2] > arr[3])
+      return false;
+    return Math.abs(arr[2] - arr[1]) + 1 >= arr[4];
   }
 
   int MaximumProfit(int[] s) {
@@ -353,7 +349,7 @@ public class Util {
 
   public static void main(String[] args) {
     Util u = new Util();
-    int[] x = {2, 3, 4, 5, 1, 1, 1, 3};
-    System.out.println(u.DivisionPossible(x, 4));
+    int[] x = {8, 1, 2, 19, 2};
+    System.out.println(u.Overlapping(x));
   }
 }
