@@ -272,13 +272,23 @@ public class Util {
     remain.add(x3);
     while (remain.size() > 2) {
       Collections.sort(remain);
-      x1 = remain.get(remain.size() - 2);
-      x2 = remain.get(remain.size() - 1);
-      c += x2;
-      remain.remove(remain.size() - 1);
-      remain.remove(remain.size() - 1);
-      pass.add(x1);
-      pass.add(x2);
+      if (remain.get(remain.size() - 2) + remain.get(remain.size() - 1) > 2 * pass.get(0)) {
+        x1 = remain.get(remain.size() - 2);
+        x2 = remain.get(remain.size() - 1);
+        c += x2;
+        remain.remove(remain.size() - 1);
+        remain.remove(remain.size() - 1);
+        pass.add(x1);
+        pass.add(x2);
+      } else {
+        x1 = remain.get(0);
+        x2 = remain.get(remain.size() - 1);
+        c += x2;
+        remain.remove(0);
+        remain.remove(remain.size() - 1);
+        pass.add(x1);
+        pass.add(x2);
+      }
       Collections.sort(pass);
       x3 = pass.get(0);;
       c += x3;
@@ -314,7 +324,7 @@ public class Util {
 
   public static void main(String[] args) {
     Util u = new Util();
-    int[] x = {3, 4, 4, 1, 5};
+    int[] x = {19, 18, 5, 2, 16};
     System.out.println(u.CrossingTheBridge(x));
   }
 }
