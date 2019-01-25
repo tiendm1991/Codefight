@@ -251,27 +251,42 @@ public class Util {
     Arrays.sort(times);
     List<Integer> pass = new ArrayList<>();
     List<Integer> remain = new ArrayList<>();
+    int s = 0;
     for (int i : times) {
       remain.add(i);
+      s += i;
     }
+    Collections.sort(remain);
     int c = 0;
+    int x1 = remain.get(0);
+    int x2 = remain.get(1);
+    c += x2;
+    remain.remove(1);
+    remain.remove(0);
+    pass.add(x1);
+    pass.add(x2);
+    Collections.sort(pass);
+    int x3 = pass.get(0);;
+    c += x3;
+    pass.remove(0);
+    remain.add(x3);
     while (remain.size() > 2) {
       Collections.sort(remain);
-      int x1 = remain.get(0);
-      int x2 = remain.get(1);
+      x1 = remain.get(remain.size() - 2);
+      x2 = remain.get(remain.size() - 1);
       c += x2;
-      remain.remove(1);
-      remain.remove(0);
+      remain.remove(remain.size() - 1);
+      remain.remove(remain.size() - 1);
       pass.add(x1);
       pass.add(x2);
       Collections.sort(pass);
-      int x3 = pass.get(0);;
+      x3 = pass.get(0);;
       c += x3;
       pass.remove(0);
       remain.add(x3);
     }
     int min = Math.max(remain.get(0), remain.get(1));
-    return c + min;
+    return Math.min(c + min, s + (times.length - 3) * times[0]);
   }
 
   int KaprekarsConstant(int num) {
@@ -299,7 +314,7 @@ public class Util {
 
   public static void main(String[] args) {
     Util u = new Util();
-    int[] x = {1, 2, 5, 10};
+    int[] x = {3, 4, 4, 1, 5};
     System.out.println(u.CrossingTheBridge(x));
   }
 }
