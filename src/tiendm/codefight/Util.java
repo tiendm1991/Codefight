@@ -236,16 +236,45 @@ public class Util {
     }
     int sum = s / division;
     Arrays.sort(arr);
-    if (arr[arr.length - 1] > division) {
+    if (arr[arr.length - 1] > sum) {
       return false;
     }
     List<Integer> ls = new ArrayList<>();
     for (int i : arr) {
       ls.add(i);
     }
-    return true;
+    int[] group = new int[division];
+    boolean[] passed = new boolean[arr.length];
+    return check(group, arr, sum, 0, passed);
   }
 
+
+  boolean check(int[] group, int[] arr, int sum, int x, boolean[] passed) {
+    int d = group.length;
+    if (x == d) {
+      return true;
+    }
+    for (int i = 0; i < arr.length; i++) {
+      if (passed[i]) {
+        continue;
+      }
+      group[x] += arr[i];
+      passed[i] = true;
+      boolean innerCheck = false;
+      if (group[x] == sum) {
+        innerCheck = check(group, arr, sum, x + 1, passed);
+      } else if (group[x] < sum) {
+        innerCheck = check(group, arr, sum, x, passed);
+      }
+      if (innerCheck) {
+        return true;
+      }
+      passed[i] = false;
+      group[x] -= arr[i];
+      continue;
+    }
+    return false;
+  }
 
   int CrossingTheBridge(int[] times) {
     Arrays.sort(times);
@@ -272,7 +301,7 @@ public class Util {
     remain.add(x3);
     while (remain.size() > 2) {
       Collections.sort(remain);
-      if (remain.get(remain.size() - 2) + remain.get(remain.size() - 1) > 2 * pass.get(0)) {
+      if (remain.get(remain.size() - 1) > 2 * pass.get(0)) {
         x1 = remain.get(remain.size() - 2);
         x2 = remain.get(remain.size() - 1);
         c += x2;
@@ -324,7 +353,7 @@ public class Util {
 
   public static void main(String[] args) {
     Util u = new Util();
-    int[] x = {19, 18, 5, 2, 16};
-    System.out.println(u.CrossingTheBridge(x));
+    int[] x = {2, 3, 4, 5, 1, 1, 1, 3};
+    System.out.println(u.DivisionPossible(x, 4));
   }
 }
