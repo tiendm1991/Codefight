@@ -1,6 +1,9 @@
 package tiendm.codefight;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Util {
 
@@ -176,11 +179,127 @@ public class Util {
     return -1;
   }
 
+  String AlphabetEncode(String message) {
+    String s = "";
+    for (int i = 0; i < message.length(); i++) {
+      char c = message.charAt(i);
+      int x = c - 'a' + 1;
+      if (c == 'z') {
+        s += 'z';
+        continue;
+      }
+      s += (char) ((x * x) % 26 + 96);
+    }
+    return s;
+  }
+
+  boolean AlphabetCheck(String letter, String word) {
+    for (int i = 0; i < word.length(); i++) {
+      String c = word.charAt(i) + "";
+      if (!letter.contains(c)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  boolean Overlapping(int[] arr) {
+    int min1 = Math.min(arr[0], arr[1]);
+    int max1 = Math.max(arr[0], arr[1]);
+    int min2 = Math.min(arr[2], arr[3]);
+    int max2 = Math.max(arr[2], arr[3]);
+    if (min1 > max2)
+      return min1 - max2 + 1 >= arr[4];
+    return min2 - max1 + 1 >= arr[4];
+  }
+
+  int MaximumProfit(int[] s) {
+    int max = Integer.MIN_VALUE;
+    for (int i = 0; i < s.length - 1; i++) {
+      int a = s[i];
+      for (int j = i + 1; j < s.length; j++) {
+        if (s[j] > s[i]) {
+          max = Math.max(max, s[j] - s[i]);
+        }
+      }
+    }
+    return max;
+  }
+
+  boolean DivisionPossible(int[] arr, int division) {
+    int s = 0;
+    for (int i : arr) {
+      s += i;
+    }
+    if (s % division != 0) {
+      return false;
+    }
+    int sum = s / division;
+    Arrays.sort(arr);
+    if (arr[arr.length - 1] > division) {
+      return false;
+    }
+    List<Integer> ls = new ArrayList<>();
+    for (int i : arr) {
+      ls.add(i);
+    }
+    return true;
+  }
+
+
+  int CrossingTheBridge(int[] times) {
+    Arrays.sort(times);
+    List<Integer> pass = new ArrayList<>();
+    List<Integer> remain = new ArrayList<>();
+    for (int i : times) {
+      remain.add(i);
+    }
+    int c = 0;
+    while (remain.size() > 2) {
+      Collections.sort(remain);
+      int x1 = remain.get(0);
+      int x2 = remain.get(1);
+      c += x2;
+      remain.remove(1);
+      remain.remove(0);
+      pass.add(x1);
+      pass.add(x2);
+      Collections.sort(pass);
+      int x3 = pass.get(0);;
+      c += x3;
+      pass.remove(0);
+      remain.add(x3);
+    }
+    int min = Math.max(remain.get(0), remain.get(1));
+    return c + min;
+  }
+
+  int KaprekarsConstant(int num) {
+    int count = 0;
+    String s = num + "";
+    while (!s.equals("6174")) {
+      char[] c = s.toCharArray();
+      Arrays.sort(c);
+      String new1 = new String(c);
+      String new2 = new StringBuilder(new1).reverse().toString();
+      int i1 = Integer.parseInt(new1);
+      int i2 = Integer.parseInt(new2);
+      num = Math.abs(i2 - i1);
+      if (num < 1000) {
+        s = "0" + num;
+      } else {
+        s = num + "";
+      }
+      count++;
+    }
+    return count;
+  }
+
+
+
   public static void main(String[] args) {
     Util u = new Util();
-    int k = 6;
-    int n = 12;
-    System.out.println(u.binomialCoefficient1(k, n));
-    System.out.println(u.binomialCoefficient2(k, n));
+    int[] x = {1, 2, 5, 10};
+    System.out.println(u.CrossingTheBridge(x));
   }
 }
