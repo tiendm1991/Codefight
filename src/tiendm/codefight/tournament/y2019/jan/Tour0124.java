@@ -99,7 +99,28 @@ public class Tour0124 {
     return false;
   }
 
-  int CrossingTheBridge(int[] times) {
+  int KaprekarsConstant(int num) {
+    int count = 0;
+    String s = num + "";
+    while (!s.equals("6174")) {
+      char[] c = s.toCharArray();
+      Arrays.sort(c);
+      String new1 = new String(c);
+      String new2 = new StringBuilder(new1).reverse().toString();
+      int i1 = Integer.parseInt(new1);
+      int i2 = Integer.parseInt(new2);
+      num = Math.abs(i2 - i1);
+      if (num < 1000) {
+        s = "0" + num;
+      } else {
+        s = num + "";
+      }
+      count++;
+    }
+    return count;
+  }
+
+  int CrossingTheBridge1(int[] times) {
     Arrays.sort(times);
     List<Integer> pass = new ArrayList<>();
     List<Integer> remain = new ArrayList<>();
@@ -151,26 +172,25 @@ public class Tour0124 {
     return Math.min(c + min, s + (times.length - 3) * times[0]);
   }
 
-  int KaprekarsConstant(int num) {
-    int count = 0;
-    String s = num + "";
-    while (!s.equals("6174")) {
-      char[] c = s.toCharArray();
-      Arrays.sort(c);
-      String new1 = new String(c);
-      String new2 = new StringBuilder(new1).reverse().toString();
-      int i1 = Integer.parseInt(new1);
-      int i2 = Integer.parseInt(new2);
-      num = Math.abs(i2 - i1);
-      if (num < 1000) {
-        s = "0" + num;
-      } else {
-        s = num + "";
-      }
-      count++;
+  int CrossingTheBridge(List<Integer> times) {
+    Collections.sort(times);
+    if (times.size() == 3) {
+      return times.stream().mapToInt(e -> e).sum();
     }
-    return count;
+    if (times.size() == 4) {
+      return Math.min(times.get(3) + 3 * times.get(1) + times.get(0),
+          times.get(3) + times.get(2) + times.get(1) + 2 * times.get(0));
+    }
+    List<Integer> l1 = times.subList(0, times.size() - 1);
+    List<Integer> l2 = times.subList(0, times.size() - 2);
+    return Math.min(times.get(0) + times.get(times.size() - 1) + CrossingTheBridge(l1),
+        2 * times.get(1) + times.get(0) + times.get(times.size() - 1) + CrossingTheBridge(l2));
   }
 
-
+  public static void main(String[] args) {
+    Tour0124 t = new Tour0124();
+    Integer[] x = {3, 4, 4, 1, 5};
+    List<Integer> a = Arrays.asList(x);
+    System.out.println(t.CrossingTheBridge(a));
+  }
 }
