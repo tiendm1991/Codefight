@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Tour01213 {
+public class Tour0123 {
   int numberOfTriangles(int[] sticks) {
     int res = 0;
     for (int i = 0; i < sticks.length; i++) {
@@ -114,7 +114,7 @@ public class Tour01213 {
   }
 
   public static void main(String[] args) {
-    Tour01213 t = new Tour01213();
+    Tour0123 t = new Tour0123();
     System.out.println(t.kStepMaximization(0, 3));
   }
 }
