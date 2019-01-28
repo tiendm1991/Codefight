@@ -39,7 +39,6 @@ public class Tour0124 {
   int MaximumProfit(int[] s) {
     int max = Integer.MIN_VALUE;
     for (int i = 0; i < s.length - 1; i++) {
-      int a = s[i];
       for (int j = i + 1; j < s.length; j++) {
         if (s[j] > s[i]) {
           max = Math.max(max, s[j] - s[i]);
