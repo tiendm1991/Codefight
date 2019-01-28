@@ -2,6 +2,9 @@ package tiendm.codefight.challenge.y2019.jan;
 
 public class PrimeSumOfPrimeFactors {
   boolean primeSumOfPrimeFactors(int n) {
+    if (isPrime(n)) {
+      return false;
+    }
     int sum = sumPrimeFactor(n);
     return isPrime(sum);
   }
