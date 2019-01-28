@@ -120,62 +120,10 @@ public class Tour0124 {
     return count;
   }
 
-  int CrossingTheBridge1(int[] times) {
-    Arrays.sort(times);
-    List<Integer> pass = new ArrayList<>();
-    List<Integer> remain = new ArrayList<>();
-    int s = 0;
-    for (int i : times) {
-      remain.add(i);
-      s += i;
-    }
-    Collections.sort(remain);
-    int c = 0;
-    int x1 = remain.get(0);
-    int x2 = remain.get(1);
-    c += x2;
-    remain.remove(1);
-    remain.remove(0);
-    pass.add(x1);
-    pass.add(x2);
-    Collections.sort(pass);
-    int x3 = pass.get(0);;
-    c += x3;
-    pass.remove(0);
-    remain.add(x3);
-    while (remain.size() > 2) {
-      Collections.sort(remain);
-      if (remain.get(remain.size() - 1) > 2 * pass.get(0)) {
-        x1 = remain.get(remain.size() - 2);
-        x2 = remain.get(remain.size() - 1);
-        c += x2;
-        remain.remove(remain.size() - 1);
-        remain.remove(remain.size() - 1);
-        pass.add(x1);
-        pass.add(x2);
-      } else {
-        x1 = remain.get(0);
-        x2 = remain.get(remain.size() - 1);
-        c += x2;
-        remain.remove(0);
-        remain.remove(remain.size() - 1);
-        pass.add(x1);
-        pass.add(x2);
-      }
-      Collections.sort(pass);
-      x3 = pass.get(0);;
-      c += x3;
-      pass.remove(0);
-      remain.add(x3);
-    }
-    int min = Math.max(remain.get(0), remain.get(1));
-    return Math.min(c + min, s + (times.length - 3) * times[0]);
-  }
-
   int CrossingTheBridge(List<Integer> times) {
     Collections.sort(times);
     if (times.size() == 3) {
-      return times.stream().mapToInt(e -> e).sum();
+      return times.get(0) + times.get(1) + times.get(2);
     }
     if (times.size() == 4) {
       return Math.min(times.get(3) + 3 * times.get(1) + times.get(0),
