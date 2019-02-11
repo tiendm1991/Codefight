@@ -21,8 +21,6 @@ public class Tour1708 {
         }
       }
     }
-    String note = "";
-    note.toCharArray();
     return s;
   }
 
