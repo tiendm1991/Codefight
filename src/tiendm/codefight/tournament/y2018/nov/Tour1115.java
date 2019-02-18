@@ -101,6 +101,6 @@ public class Tour1115 {
     Tour1115 t = new Tour1115();
     int[] values = {1, 6, 7};
     String[] s = {"*", "-", "5", "6", "7"};
-    System.out.println(t);
+    System.out.println(t.greatestCommonPrimeDivisor(12, 18));
   }
 }
