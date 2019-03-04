@@ -26,23 +26,39 @@ public class FillShortestPaths {
     int x4 = C - cs - 1;
     int min = Math.min(x1, Math.min(x2, Math.min(x3, x4)));
     if (x1 == min) {
-      for (int i = 0; i < x1; i++) {
-        plan[i][cs] = '#';
+      int count = 1;
+      for (int i = x1 - 1; i >= 0; i--) {
+        for (int j = cs - count; j <= cs + count; j++) {
+          plan[i][j] = '#';
+        }
+        count++;
       }
     }
     if (x2 == min) {
+      int count = 1;
       for (int i = x2; i < R; i++) {
-        plan[i][cs] = '#';
+        for (int j = cs - count; j <= cs + count; j++) {
+          plan[i][j] = '#';
+        }
+        count++;
       }
     }
     if (x3 == min) {
-      for (int i = 0; i < x3; i++) {
-        plan[rs][i] = '#';
+      int count = 1;
+      for (int i = x3 - 1; i >= 0; i--) {
+        for (int j = rs - count; j <= rs + count; j++) {
+          plan[j][i] = '#';
+        }
+        count++;
       }
     }
     if (x4 == min) {
+      int count = 1;
       for (int i = x4; i < C; i++) {
-        plan[rs][i] = '#';
+        for (int j = rs - count; j <= rs + count; j++) {
+          plan[j][i] = '#';
+        }
+        count++;
       }
     }
     return plan;
@@ -53,7 +69,7 @@ public class FillShortestPaths {
     char[][] c = {{' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', 's', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' '},};
+        {' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' '}};
     System.out.println(b.fillShortestPaths(c));
   }
 }
