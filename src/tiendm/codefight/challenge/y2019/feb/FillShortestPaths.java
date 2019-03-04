@@ -24,6 +24,7 @@ public class FillShortestPaths {
     int x2 = R - rs -1;
     int x3 = cs;
     int x4 = C - cs -1;
+    int min = Math.min(x1, Math.min(x2, Math.min(x3, x4)));
     return plan;
   }
   
