@@ -17,9 +17,28 @@ public class Tour1608 {
     return a[0] > a[a.length - 1];
   }
 
+  boolean cyclicSequence2(int[] sequence) {
+
+    boolean found = false;
+    int st = -1;
+    for (int i = 1; i < sequence.length; i++) {
+      if (sequence[i - 1] == sequence[i]) {
+        return false;
+      }
+      if (sequence[i - 1] > sequence[i]) {
+        if (found) {
+          return false;
+        }
+        found = true;
+        st = i;
+      }
+    }
+    return st == -1 || sequence[st] < sequence[(st +1) % sequence.length];
+  }
+
   public static void main(String[] args) {
     Tour1608 t = new Tour1608();
-    int[] x = {5, 9, 1, 2, 4};
-    System.out.println(t.cyclicSequence(x));
+    int[] x = {5, -4, -3, 0, 1, 3, 4, 5};
+    System.out.println(t.cyclicSequence2(x));
   }
 }

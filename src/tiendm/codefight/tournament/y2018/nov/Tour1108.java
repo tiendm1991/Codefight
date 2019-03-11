@@ -149,10 +149,30 @@ public class Tour1108 {
     return Integer.parseInt(myStack.get(0));
   }
 
+  int isSumOfConsecutive2(int n) {
+    int sum = 0;
+    for (int i = 1; i < n; i++) {
+      int s = i;
+      int x = i;
+      while (s <= n) {
+        s += x;
+        x++;
+        if (s == n) {
+          sum++;
+          break;
+        } else if (s > n) {
+          break;
+        }
+      }
+    }
+    return sum;
+  }
+
+
   public static void main(String[] args) {
     Tour1108 t = new Tour1108();
     int[] values = {-1000, 0, -2, 0};
     String[] s = {"*", "-", "5", "6", "7"};
-    System.out.println(t.polishNotation(s));
+    System.out.println(t.isSumOfConsecutive2(9));
   }
 }

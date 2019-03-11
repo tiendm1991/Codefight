@@ -206,34 +206,6 @@ public class Tour1030 {
     return -1;
   }
 
-  int dfsComponentSize(final boolean[][] matrix, int vertex) {
-
-    class Helper {
-      int componentSize = 0;
-
-      void dfs(int currentVertex, ArrayList<Boolean> visited) {
-        visited.set(currentVertex, true);
-        componentSize++;
-        for (int nextVertex = 0; nextVertex < matrix.length; nextVertex++) {
-          if (matrix[currentVertex][nextVertex] && !visited.get(nextVertex)) {
-            dfs(nextVertex, visited);
-          }
-        }
-      }
-    }
-    Helper h = new Helper();
-
-    ArrayList<Boolean> visited = new ArrayList<>();
-
-    for (int i = 0; i < matrix.length; i++) {
-      visited.add(false);
-    }
-
-    h.dfs(vertex, visited);
-
-    return h.componentSize;
-  }
-
   int[] arrayPreviousLess(int[] items) {
 
     int[] result = new int[items.length];
